@@ -1,0 +1,26 @@
+﻿<Window x:Class="SnapCatch.TopDrawWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SnapCatch"
+        xmlns:supprtControls="clr-namespace:SnapCatch.SupprtControls"
+        mc:Ignorable="d"
+        x:Name="MainWnd"
+        Title="TopDrawWindow" 
+        VerticalAlignment="Stretch" 
+        HorizontalAlignment="Stretch">
+    <Grid>
+        <supprtControls:MagnifyCtrl VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="MagnifyCtrl" Width="120" Height="120" Panel.ZIndex="3000"></supprtControls:MagnifyCtrl>
+        <Canvas x:Name="DrawCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <supprtControls:SquareAreaSelectCtrl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Panel.ZIndex="3000" x:Name="SquareAreaSelect"/>
+            <Rectangle Panel.ZIndex="2000" Opacity=".3" 
+                       Width="{Binding ElementName=MainWnd, Path=Width}" 
+                       Height="{Binding ElementName=MainWnd, Path=Height}" Fill="Black">
+            </Rectangle>
+            <Image Panel.ZIndex="1000" x:Name="InternalImage">
+            </Image>
+        </Canvas>
+    </Grid>
+</Window>
+

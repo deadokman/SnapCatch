@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="SnapCatch.SupprtControls.MagnifyCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SnapCatch"
+             mc:Ignorable="d" 
+             x:Name="Ctrl"
+             d:DesignHeight="100" d:DesignWidth="100" Background="White">
+    <Border BorderThickness="1" BorderBrush="Red">
+        <Grid>
+            <Rectangle Panel.ZIndex="9999" Height="{Binding ElementName=Ctrl, Path=Height}" Width="4" HorizontalAlignment="Center" Opacity=".3" Fill="Black"></Rectangle>
+            <Rectangle Panel.ZIndex="9999" Width="{Binding ElementName=Ctrl, Path=Width}" Height="4" VerticalAlignment="Center" Opacity=".3" Fill="Black"></Rectangle>
+            <Image HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None" Panel.ZIndex="1000" x:Name="magnifyImg"></Image>
+        </Grid>
+    </Border>
+</UserControl>
