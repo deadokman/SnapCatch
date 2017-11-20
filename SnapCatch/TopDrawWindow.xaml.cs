@@ -61,6 +61,7 @@ namespace SnapCatch
                 if (ScreenAreaCaptured != null)
                 {
                     var display = ImgProc.CropImageSource(_screenSnapshot.BitmapImage, _currentRectangle);
+                    display.Freeze();
                     ScreenAreaCaptured.Invoke(display);
                 }
             }

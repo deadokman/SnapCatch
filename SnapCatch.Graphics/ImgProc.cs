@@ -11,8 +11,16 @@ namespace SnapCatch.Processing
     {
         public static ImageSource CropImageSource(BitmapSource img, Int32Rect rect, double scale = 1)
         {
-            rect.Width = 1;
-            rect.Height = 1;
+            if (rect.Width == 0)
+            {
+                rect.Width = 1;
+            }
+
+            if (rect.Height == 0)
+            {
+                rect.Height = 1;
+            }
+
             var cropped = new CroppedBitmap(img, rect);
             var tb = new TransformedBitmap(cropped, new ScaleTransform(scale, scale, rect.Width/2, rect.Height/2));
             return tb;

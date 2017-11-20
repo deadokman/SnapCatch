@@ -24,13 +24,16 @@ namespace SnapCatch
     /// </summary>
     public partial class MainWindow : Window
     {
+        private TopDrawWindow[] _tdWindows;
+
         public MainWindow()
         {
             InitializeComponent();
             var screens = ScreenRepository.GetScreens();
-
-            foreach (var sc in screens)
+            _tdWindows = new TopDrawWindow[screens.Length];
+            for (var i = 0; i < screens.Length; i++)
             {
+                var sc = screens[i];
                 var tmWindow = new TopDrawWindow(sc);
                 tmWindow.WindowStartupLocation = WindowStartupLocation.Manual;
                 tmWindow.Left = sc.ScreenItem.Bounds.Left;
@@ -44,9 +47,20 @@ namespace SnapCatch
                 tmWindow.WindowStyle = WindowStyle.None;
                 //var hwnd = new WindowInteropHelper(tmWindow).Handle;
                 //SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
+                _tdWindows[i] = tmWindow;
                 tmWindow.Show();
+                tmWindow.ScreenAreaCaptured += TmWindowOnScreenAreaCaptured;
+            }
+        }
+
+        private void TmWindowOnScreenAreaCaptured(ImageSource screenSnapshot)
+        {
+            foreach (var topDrawWindow in _tdWindows)
+            {
+                topDrawWindow.Close();
             }
 
+            Screen.Source = screenSnapshot;
         }
     }
 }
