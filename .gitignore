@@ -33,6 +33,7 @@ gph.cmd
 /source/Ppd/Ngt.Ppd.Plugin3/Oracle.DataAccess.dll
 
 /DB/Deploy/scripts/*
+/packages/*
 
 /_Build/Output/*
 /source/.vs/*
