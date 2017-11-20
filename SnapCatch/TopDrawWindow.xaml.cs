@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using SnapCatch.Processing;
 
 namespace SnapCatch
@@ -17,6 +18,8 @@ namespace SnapCatch
 
         private Rect _currentRectangle;
 
+        public event SnapSelectedDelegate ScreenAreaCaptured;
+
         #region Константы
 
         private const int MagnifyWidth= 50;
@@ -24,6 +27,9 @@ namespace SnapCatch
         private const int MagnifyHalfWidth = MagnifyWidth / 2;
 
         #endregion
+
+        public delegate void SnapSelectedDelegate(ImageSource screenSnapshot);
+
 
         public TopDrawWindow(ScreenSnapshot screenSnap)
         {
@@ -52,8 +58,11 @@ namespace SnapCatch
             if (e.LeftButton == MouseButtonState.Released)
             {
                 SquareAreaSelect.Visibility = Visibility.Collapsed;
-                var display = ImgProc.CropImageSource(_screenSnapshot.BitmapImage, _currentRectangle);
-
+                if (ScreenAreaCaptured != null)
+                {
+                    var display = ImgProc.CropImageSource(_screenSnapshot.BitmapImage, _currentRectangle);
+                    ScreenAreaCaptured.Invoke(display);
+                }
             }
         }
 
