@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnapCatch"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:settingsPages="clr-namespace:SnapCatch.AdditionalPages.SettingsPages"
+        xmlns:messaging="clr-namespace:System.Runtime.Remoting.Messaging;assembly=mscorlib"
         mc:Ignorable="d"
         IsMinButtonEnabled="False"
         Icon="Resources/Icons/icons8-settings-40.png"
-                      IconScalingMode="NoScaleSmallerFrame"
+        IconScalingMode="NoScaleSmallerFrame"
         ShowMinButton="False"
         ShowMaxRestoreButton="False"
-        Title="Настройки" Height="400" Width="700" DataContext="{Binding Source={StaticResource Locator}, Path=Settings}" Background="{DynamicResource ControlBackgroundBrush}">
+        Title="Настройки" Height="400" Width="700"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Settings}"
+        Background="{DynamicResource ControlBackgroundBrush}">
     <controls:MetroWindow.Resources>
         <Style x:Key="SettingsLIstBoxStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MetroListBoxItem}">
             <Setter Property="Background" Value="Transparent"/>
@@ -25,7 +29,7 @@
         </Style>
         <Style x:Key="IconRectangle" TargetType="{x:Type Rectangle}">
             <Setter Property="Width" Value="20"/>
-            <Setter Property="Height" Value="20"/>
+            <Setter Property="Height" Value="40"/>
             <Setter Property="Fill" Value="{DynamicResource TextBrush}"/>
         </Style>
     </controls:MetroWindow.Resources>
@@ -35,40 +39,39 @@
                 <ColumnDefinition Width=".3*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <ListBox  HorizontalContentAlignment="Left" Background="{DynamicResource AccentColorBrush4}" Grid.Column="0">
-                <ListBoxItem Style="{StaticResource SettingsLIstBoxStyle}">
-                    <DockPanel VerticalAlignment="Center">
-                        <Rectangle Style="{StaticResource IconRectangle}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_settings}" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Style="{StaticResource LiTextBlockStyle}" Text="ОБЩИЕ"></TextBlock>
-                    </DockPanel>
-                </ListBoxItem>
-                <ListBoxItem Style="{StaticResource SettingsLIstBoxStyle}">
-                    <DockPanel VerticalAlignment="Center">
-                        <Rectangle Style="{StaticResource IconRectangle}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_arcade_button}" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Style="{StaticResource LiTextBlockStyle}" Text="КЛАВИШИ"></TextBlock>
-                    </DockPanel>
-                </ListBoxItem>
-                <ListBoxItem Style="{StaticResource SettingsLIstBoxStyle}">
-                    <DockPanel VerticalAlignment="Center">
-                        <Rectangle Style="{StaticResource IconRectangle}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_camera}" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Style="{StaticResource LiTextBlockStyle}" Text="СНИМОК"></TextBlock>
-                    </DockPanel>
-                </ListBoxItem>
+            <ListBox SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding DisplayItems}" HorizontalContentAlignment="Left" Background="{DynamicResource AccentColorBrush3}" Grid.Column="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <Rectangle Style="{StaticResource IconRectangle}">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Uniform" Visual="{Binding Visual}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Style="{StaticResource LiTextBlockStyle}" Text="{Binding Name}"></TextBlock>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
             <!--Содержимое окна настроек-->
-            <ContentControl Grid.Column="1"></ContentControl>
+            <Border Grid.Column="1" BorderThickness=".5" BorderBrush="{DynamicResource AccentColorBrush}">
+                <TabControl SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding DisplayItems}">
+                    <TabControl.ItemContainerStyle>
+                        <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}">
+                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <Border BorderThickness=".5" BorderBrush="{DynamicResource AccentColorBrush}">
+                                            <Frame Margin="2" NavigationUIVisibility="Hidden" Content="{Binding Page}"></Frame>
+                                        </Border>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabControl.ItemContainerStyle>
+                </TabControl>
+            </Border>
         </Grid>
     </Border>
 </controls:MetroWindow>

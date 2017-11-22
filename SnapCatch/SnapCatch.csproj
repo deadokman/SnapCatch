@@ -78,6 +78,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdditionalPages\SettingsPages\GeneralSettingsPage.xaml.cs">
+      <DependentUpon>GeneralSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdditionalPages\SettingsPages\InterfaceSettingsPage.xaml.cs">
+      <DependentUpon>InterfaceSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdditionalPages\SettingsPages\KeyBindingsPage.xaml.cs">
+      <DependentUpon>KeyBindingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdditionalPages\SettingsPages\SettingsItems\SettingsDisplayItem.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\IconsResources.cs" />
     <Compile Include="ScreenEditorWindow.xaml.cs">
       <DependentUpon>ScreenEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -95,8 +111,35 @@
       <DependentUpon>TopDrawWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SettingsPageViewModel\AccentColorMenuData.cs" />
+    <Compile Include="ViewModel\SettingsPageViewModel\AppThemeMenuData.cs" />
+    <Compile Include="ViewModel\SettingsPageViewModel\InterfaceSettingsViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="AdditionalPages\SettingsPages\GeneralSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdditionalPages\SettingsPages\InterfaceSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdditionalPages\SettingsPages\KeyBindingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Localization\lang.en-US.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Localization\lang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ControlStylesDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -147,11 +190,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -172,9 +210,7 @@
       <Name>SnapCatch.Graphics</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AdditionalPages\SettingsPages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />
   </ItemGroup>

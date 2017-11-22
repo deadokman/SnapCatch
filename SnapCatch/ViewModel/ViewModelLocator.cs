@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using SnapCatch.ViewModel.SettingsPageViewModel;
 
 namespace SnapCatch.ViewModel
 {
@@ -44,6 +45,7 @@ namespace SnapCatch.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
+            SimpleIoc.Default.Register<InterfaceSettingsViewModel>();
         }
 
         public MainViewModel Main
@@ -57,6 +59,15 @@ namespace SnapCatch.ViewModel
         public SettingsViewModel Settings
         {
             get { return ServiceLocator.Current.GetInstance<SettingsViewModel>(); }
+        }
+
+        public InterfaceSettingsViewModel InterfaceSettings
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<InterfaceSettingsViewModel>();
+                
+            }
         }
         
         public static void Cleanup()

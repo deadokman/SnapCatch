@@ -1,0 +1,79 @@
+﻿<Page x:Class="SnapCatch.AdditionalPages.SettingsPages.InterfaceSettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SnapCatch.AdditionalPages.SettingsPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="InterfaceSettingsPage" DataContext="{Binding Source={StaticResource Locator}, Path=InterfaceSettings}">
+    <Grid Margin="5">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel CanVerticallyScroll="True">
+                <TextBox FontSize="16" Text="{DynamicResource is_title}"  
+                         Style="{StaticResource TextSeparatorStyle}"/>
+                <!--Theme and lang settings-->
+                <TextBlock Text="{DynamicResource is_lang}"/>
+                <ComboBox
+                    DisplayMemberPath="LangName"
+                    ItemsSource="{Binding AvailableLanguages}"
+                    SelectedItem="{Binding SelectedLang}"/>
+                <TextBlock Text="{DynamicResource is_baseColor}"/>
+                <ComboBox 
+                    ItemsSource="{Binding AppThemes}"
+                    SelectedItem="{Binding SelectedAppTheme}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ToolTip="{Binding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="color" />
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse VerticalAlignment="Center"
+                                         Grid.Column="0"
+                                         Width="15"
+                                         Height="15"
+                                         Stroke="#bdbdbd"
+                                         Fill="{Binding ColorBrush}">
+                                </Ellipse>
+                                <TextBlock Grid.Column="1"
+                                           Margin="4 -1 0 0"
+                                           FontSize="{DynamicResource NormalFontSize}"
+                                           Text="{Binding Name}"
+                                           TextAlignment="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="{DynamicResource is_accent}"/>
+                <ComboBox 
+                    ItemsSource="{Binding AccentColors}"
+                    SelectedItem="{Binding SelectedAccent}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ToolTip="{Binding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="color" />
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse VerticalAlignment="Center"
+                                         Grid.Column="0"
+                                         Width="15"
+                                         Height="15"
+                                         Stroke="#bdbdbd"
+                                         Fill="{Binding ColorBrush}">
+                                </Ellipse>
+                                <TextBlock Grid.Column="1"
+                                           Margin="4 -1 0 0"
+                                           FontSize="{DynamicResource NormalFontSize}"
+                                           Text="{Binding Name}"
+                                           TextAlignment="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <!--End theme block-->
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
