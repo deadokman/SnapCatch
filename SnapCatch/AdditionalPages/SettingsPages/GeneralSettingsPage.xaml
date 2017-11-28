@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:SnapCatch.AdditionalPages.SettingsPages"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="700"
-      Title="GeneralSettingsPage">
+      Title="GeneralSettingsPage" DataContext="{Binding Source={StaticResource Locator}, Path=GeneralSettingsViewModel}">
     <Grid Margin="5">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel CanVerticallyScroll="True">
@@ -14,11 +14,12 @@
                 <TextBox FontSize="16" Text="{DynamicResource gs_title}"  
                          Style="{StaticResource TextSeparatorStyle}"/>
                 <TextBlock Text="{DynamicResource gs_screensPath}"/>
-                <DockPanel LastChildFill="True">
+                <DockPanel Margin="0,0,0,2" LastChildFill="True">
                     <Button Command="{Binding SetPathCommand}" Width="30" Content="..."></Button>
-                    <TextBox Text="{Binding PluginsPath}" Margin="5 0 0 0" HorizontalAlignment="Stretch" IsReadOnly="True"/>
+                    <TextBox Text="{Binding ScreenShotFolder}" Margin="5 0 0 0" HorizontalAlignment="Stretch" IsReadOnly="True"/>
                 </DockPanel>
-                </StackPanel>
-            </ScrollViewer>
+                <CheckBox IsChecked="{Binding AutoStartUpProgram}"  Margin="0,2,0,2" Content="{DynamicResource gs_startUp}"></CheckBox>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

@@ -4,9 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SnapCatch.AdditionalPages.SettingsPages"
+      xmlns:viewModel="clr-namespace:SnapCatch.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="KeyBindingsPage" Background="Transparent">
+      Title="KeyBindingsPage" Background="Transparent" DataContext="{Binding Source={StaticResource Locator}, Path=KeyBindingsViewModel}">
     <Page.Resources>
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MetroTextBlock}">
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
@@ -19,19 +20,25 @@
             <Setter Property="FontSize" Value="16"></Setter>
         </Style>
     </Page.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Text="Снимок прямоугольной области"></TextBlock>
-        <TextBox Grid.Row="0" Grid.Column="1"></TextBox>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Снимок текущего экрана"></TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="1"></TextBox>
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel CanVerticallyScroll="True">
+            <TextBox FontSize="16" Text="{DynamicResource kb_title}"  
+                     Style="{StaticResource TextSeparatorStyle}"/>
+            <!--Theme and lang settings-->
+            <TextBlock Foreground="{DynamicResource TextBrush}" Text="{DynamicResource kb_square}"/>
+            <TextBox GotFocus="SquareScreenHotKey_OnGotFocus" LostFocus="SquareScreenHotKey_OnLostFocus" 
+                     IsReadOnly="True" 
+                     Text="{Binding SquareAreaText}" 
+                     viewModel:FocusExtension.IsFocused="{Binding IsSquareAreaFocused}" 
+                     x:Name="SquareScreenHotKey"></TextBox>
+            <TextBlock Foreground="{DynamicResource TextBrush}" Text="{DynamicResource kb_screen}"/>
+            <TextBox GotFocus="ActiveScreenHotKey_OnGotFocus" 
+                     LostFocus="ActiveScreenHotKey_OnLostFocus" 
+                     Text="{Binding ScreenText}" 
+                     viewModel:FocusExtension.IsFocused="{Binding IsScreenAreaFocused}" 
+                     x:Name="ActiveScreenHotKey" IsReadOnly="True">
+            </TextBox>
+            <!--End theme block-->
+        </StackPanel>
+    </ScrollViewer>
 </Page>

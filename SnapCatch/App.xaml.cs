@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using MahApps.Metro;
+using SnapCatch.KeyHook;
 
 namespace SnapCatch
 {
@@ -35,7 +36,6 @@ namespace SnapCatch
         /// CurrentApplication theme
         /// </summary>
         public static AppTheme SelectedAppTheme { get; set; }
-
 
 
         public App()
@@ -93,14 +93,14 @@ namespace SnapCatch
                 }
 
                 //3. Находим старую ResourceDictionary и удаляем его и добавляем новую ResourceDictionary
-                ResourceDictionary oldDict = (from d in Application.Current.Resources.MergedDictionaries
+                ResourceDictionary oldDict = (from d in Current.Resources.MergedDictionaries
                     where d.Source != null && d.Source.OriginalString.StartsWith("Localization/lang.")
                     select d).First();
                 if (oldDict != null)
                 {
-                    int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDict);
-                    Application.Current.Resources.MergedDictionaries.Remove(oldDict);
-                    Application.Current.Resources.MergedDictionaries.Insert(ind, dict);
+                    int ind = Current.Resources.MergedDictionaries.IndexOf(oldDict);
+                    Current.Resources.MergedDictionaries.Remove(oldDict);
+                    Current.Resources.MergedDictionaries.Insert(ind, dict);
                 }
                 else
                 {
@@ -108,7 +108,7 @@ namespace SnapCatch
                 }
 
                 //4. Вызываем евент для оповещения всех окон.
-                LanguageChanged(Application.Current, new EventArgs());
+                LanguageChanged(Current, new EventArgs());
             }
         }
 

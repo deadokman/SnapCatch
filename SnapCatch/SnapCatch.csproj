@@ -110,10 +110,13 @@
     <Compile Include="TopDrawWindow.xaml.cs">
       <DependentUpon>TopDrawWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\FocusExtension.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SettingsPageViewModel\AccentColorMenuData.cs" />
     <Compile Include="ViewModel\SettingsPageViewModel\AppThemeMenuData.cs" />
+    <Compile Include="ViewModel\SettingsPageViewModel\GeneralSettingsViewModel.cs" />
     <Compile Include="ViewModel\SettingsPageViewModel\InterfaceSettingsViewModel.cs" />
+    <Compile Include="ViewModel\SettingsPageViewModel\KeyBindingsViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="AdditionalPages\SettingsPages\GeneralSettingsPage.xaml">
@@ -209,8 +212,14 @@
       <Project>{f658e8fe-637c-48b6-b736-1ab89e64c76c}</Project>
       <Name>SnapCatch.Graphics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SnapCatch.KeyHook\SnapCatch.KeyHook.csproj">
+      <Project>{f0eb6bfa-ce56-489e-9f28-318ff5db7537}</Project>
+      <Name>SnapCatch.KeyHook</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Logic\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />
   </ItemGroup>

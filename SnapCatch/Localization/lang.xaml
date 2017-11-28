@@ -10,10 +10,15 @@
     <!--General Settings Window-->
     <system:String x:Key="gs_title">Основные настройки</system:String>
     <system:String x:Key="gs_general">Русский</system:String>
-    <system:String x:Key="gs_screensPath">Путь к файлам:</system:String>
+    <system:String x:Key="gs_screensPath">Путь к файлам скриншотов:</system:String>
+    <system:String x:Key="gs_startUp">Запускать приложение при старте операционной системы </system:String>
     <!--Interface Settings Window-->
     <system:String x:Key="is_title">Интерфейс и внешний вид</system:String>
     <system:String x:Key="is_lang">Язык интерфейса:</system:String>
     <system:String x:Key="is_accent">Цвет акцента интерфейса:</system:String>
     <system:String x:Key="is_baseColor">Цветовая схема:</system:String>
+    <!--KeyBindings settings window-->
+    <system:String x:Key="kb_title">Горячие клавиши</system:String>
+    <system:String x:Key="kb_square">Снимок прямоугольной области экрана</system:String>
+    <system:String x:Key="kb_screen">Снимок текущего экрана</system:String>
 </ResourceDictionary>

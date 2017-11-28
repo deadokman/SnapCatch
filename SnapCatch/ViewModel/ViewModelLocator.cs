@@ -46,6 +46,8 @@ namespace SnapCatch.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
             SimpleIoc.Default.Register<InterfaceSettingsViewModel>();
+            SimpleIoc.Default.Register<GeneralSettingsViewModel>();
+            SimpleIoc.Default.Register<KeyBindingsViewModel>();
         }
 
         public MainViewModel Main
@@ -66,10 +68,25 @@ namespace SnapCatch.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<InterfaceSettingsViewModel>();
-                
             }
         }
-        
+
+        public KeyBindingsViewModel KeyBindingsViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<KeyBindingsViewModel>();
+            }
+        }
+
+        public GeneralSettingsViewModel GeneralSettingsViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GeneralSettingsViewModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

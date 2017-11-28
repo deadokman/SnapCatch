@@ -58,5 +58,53 @@ namespace SnapCatch.Properties {
                 this["BaseTheme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:")]
+        public string ScreenContentFolder {
+            get {
+                return ((string)(this["ScreenContentFolder"]));
+            }
+            set {
+                this["ScreenContentFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoStartUp {
+            get {
+                return ((bool)(this["AutoStartUp"]));
+            }
+            set {
+                this["AutoStartUp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LControlKey +PrintScreen")]
+        public string SquareAreaScreenKey {
+            get {
+                return ((string)(this["SquareAreaScreenKey"]));
+            }
+            set {
+                this["SquareAreaScreenKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("PrintScreen")]
+        public string ActiveAreaScreen {
+            get {
+                return ((string)(this["ActiveAreaScreen"]));
+            }
+            set {
+                this["ActiveAreaScreen"] = value;
+            }
+        }
     }
 }

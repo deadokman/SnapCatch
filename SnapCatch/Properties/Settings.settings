@@ -11,5 +11,17 @@
     <Setting Name="BaseTheme" Type="System.String" Scope="User">
       <Value Profile="(Default)">BaseLight</Value>
     </Setting>
+    <Setting Name="ScreenContentFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:</Value>
+    </Setting>
+    <Setting Name="AutoStartUp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SquareAreaScreenKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LControlKey +PrintScreen</Value>
+    </Setting>
+    <Setting Name="ActiveAreaScreen" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PrintScreen</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
