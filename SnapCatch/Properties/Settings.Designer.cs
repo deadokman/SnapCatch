@@ -98,12 +98,12 @@ namespace SnapCatch.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("PrintScreen")]
-        public string ActiveAreaScreen {
+        public string ActiveScreenScreenKey {
             get {
-                return ((string)(this["ActiveAreaScreen"]));
+                return ((string)(this["ActiveScreenScreenKey"]));
             }
             set {
-                this["ActiveAreaScreen"] = value;
+                this["ActiveScreenScreenKey"] = value;
             }
         }
     }

@@ -20,7 +20,7 @@
     <Setting Name="SquareAreaScreenKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">LControlKey +PrintScreen</Value>
     </Setting>
-    <Setting Name="ActiveAreaScreen" Type="System.String" Scope="User">
+    <Setting Name="ActiveScreenScreenKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">PrintScreen</Value>
     </Setting>
   </Settings>

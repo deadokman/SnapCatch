@@ -34,7 +34,7 @@
             <TextBlock Foreground="{DynamicResource TextBrush}" Text="{DynamicResource kb_screen}"/>
             <TextBox GotFocus="ActiveScreenHotKey_OnGotFocus" 
                      LostFocus="ActiveScreenHotKey_OnLostFocus" 
-                     Text="{Binding ScreenText}" 
+                     Text="{Binding ActiveScreenText}" 
                      viewModel:FocusExtension.IsFocused="{Binding IsScreenAreaFocused}" 
                      x:Name="ActiveScreenHotKey" IsReadOnly="True">
             </TextBox>

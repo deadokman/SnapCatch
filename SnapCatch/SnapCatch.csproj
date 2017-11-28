@@ -88,6 +88,9 @@
       <DependentUpon>KeyBindingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdditionalPages\SettingsPages\SettingsItems\SettingsDisplayItem.cs" />
+    <Compile Include="Logic\KeyBindsContainer.cs" />
+    <Compile Include="Logic\KeyBindsHolder.cs" />
+    <Compile Include="Logic\ActionTypes.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -217,9 +220,7 @@
       <Name>SnapCatch.KeyHook</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Logic\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />
   </ItemGroup>

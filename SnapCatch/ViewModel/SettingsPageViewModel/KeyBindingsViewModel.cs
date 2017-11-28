@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GalaSoft.MvvmLight;
 using SnapCatch.KeyHook;
+using SnapCatch.Logic;
 
 namespace SnapCatch.ViewModel.SettingsPageViewModel
 {
@@ -34,11 +35,22 @@ namespace SnapCatch.ViewModel.SettingsPageViewModel
         public KeyBindingsViewModel()
         {
             _pressedKeys = new HashSet<Keys>();
+
+            KeyBindsContainer container;
+            if (KeyBindsHolder.TryGetBindingInfo(ActionTypes.SquareAreaScreenKey, out container))
+            {
+                _squareAreaText = container.KeybindsStr;
+            }
+
+            if (KeyBindsHolder.TryGetBindingInfo(ActionTypes.ActiveScreenScreenKey, out container))
+            {
+                _activeScreenText = container.KeybindsStr;
+            }
         }
 
         private HashSet<Keys> _pressedKeys;
         private string _squareAreaText;
-        private string _screenText;
+        private string _activeScreenText;
 
 
         private void HandleKeyboardEvent(KeyboardEventArgs e)
@@ -72,7 +84,7 @@ namespace SnapCatch.ViewModel.SettingsPageViewModel
 
                 if (_isScreenAreaFocused)
                 {
-                    ScreenText = sb.ToString();
+                    ActiveScreenText = sb.ToString();
                 }
 
                 _pressedKeys.Clear();
@@ -91,18 +103,18 @@ namespace SnapCatch.ViewModel.SettingsPageViewModel
             get { return _squareAreaText; }
             set
             {
-                _squareAreaText = value; 
+                _squareAreaText = value;
                 RaisePropertyChanged(() => SquareAreaText);
             }
         }
 
-        public string ScreenText
+        public string ActiveScreenText
         {
-            get { return _screenText; }
+            get { return _activeScreenText; }
             set
             {
-                _screenText = value;
-                RaisePropertyChanged(() => ScreenText);
+                _activeScreenText = value;
+                RaisePropertyChanged(() => ActiveScreenText);
             }
         }
 
