@@ -49,5 +49,23 @@ namespace SnapCatch.AdditionalPages.SettingsPages
                 dc.IsScreenAreaFocused = false;
             }
         }
+
+        private void ActiveWindowHotKey_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            var dc = this.DataContext as KeyBindingsViewModel;
+            if (dc != null)
+            {
+                dc.IsActiveWindowFocused = true;
+            }
+        }
+
+        private void ActiveWindowHotKey_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            var dc = this.DataContext as KeyBindingsViewModel;
+            if (dc != null)
+            {
+                dc.IsActiveWindowFocused = false;
+            }
+        }
     }
 }

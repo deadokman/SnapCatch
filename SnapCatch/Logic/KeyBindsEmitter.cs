@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
+using SnapCatch.KeyHook;
 
 namespace SnapCatch.Logic
 {
-    public static class KeyBindsHolder
+    public static class KeyBindsEmitter
     {
         private static Dictionary<ActionTypes, KeyBindsContainer> _keyPressHolder = new Dictionary<ActionTypes, KeyBindsContainer>();
 
-        static KeyBindsHolder()
+        private static HashSet<Keys>  _pressedKeys = new HashSet<Keys>();
+
+        static KeyBindsEmitter()
         {
             var settingsType = typeof(Properties.Settings);
             foreach (var actionName in Enum.GetNames(typeof(ActionTypes)))
@@ -25,7 +29,48 @@ namespace SnapCatch.Logic
                     _keyPressHolder.Add(atype, new KeyBindsContainer(keys, value, atype, property));
                 }
             }
+            //Добавить реакцию на нажатия кнопок
+            KeyboardMonitor.SubscribeCommonHandler(KeyPressed);
         }
+
+        public static void KeyPressed(KeyboardEventArgs e)
+        {
+            if (e.State == EState.Down)
+            {
+                _pressedKeys.Add(e.Key);
+            }
+
+            if (e.Type == EKeyType.Common && e.State == EState.Up && _pressedKeys.Any())
+            {
+                foreach (var keyBindsContainer in _keyPressHolder)
+                {
+                    if (keyBindsContainer.Value.Keys.SequenceEqual(_pressedKeys))
+                    {
+                        BindedKeyPress?.Invoke(keyBindsContainer.Key);
+                    }
+                }
+
+                _pressedKeys.Clear();
+            }
+
+            if (e.State == EState.Up)
+            {
+                _pressedKeys.Remove(e.Key);
+            }
+
+            e.Handled = true;
+        }
+
+        /// <summary>
+        /// Delegate for raising binded key pressing event
+        /// </summary>
+        /// <param name="type"></param>
+        public delegate void KeyPressAction(ActionTypes type);
+
+        /// <summary>
+        /// Binded key press event
+        /// </summary>
+        public static event KeyPressAction BindedKeyPress;
 
         /// <summary>
         /// Try get bindings for action type

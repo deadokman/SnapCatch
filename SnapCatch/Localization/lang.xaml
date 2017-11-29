@@ -3,6 +3,9 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <system:String x:Key="app_name">Trader</system:String>
     <system:String x:Key="app_ver">0.0.0</system:String>
+    <!--TaskBar Context menu-->
+    <system:String x:Key="tb_settings">Настройки</system:String>
+    <system:String x:Key="tb_close_app">Закрыть</system:String>
     <!--Unhandled error window-->
     <system:String x:Key="errorw_title">Ошибка</system:String>
     <system:String x:Key="errorw_expander_title">Подробнее</system:String>
@@ -12,6 +15,7 @@
     <system:String x:Key="gs_general">Русский</system:String>
     <system:String x:Key="gs_screensPath">Путь к файлам скриншотов:</system:String>
     <system:String x:Key="gs_startUp">Запускать приложение при старте операционной системы </system:String>
+    <system:String x:Key="gs_tray_on_close">Сворачивать приложение в трей при нажатии кнопки закрыть</system:String>
     <!--Interface Settings Window-->
     <system:String x:Key="is_title">Интерфейс и внешний вид</system:String>
     <system:String x:Key="is_lang">Язык интерфейса:</system:String>
@@ -21,4 +25,5 @@
     <system:String x:Key="kb_title">Горячие клавиши</system:String>
     <system:String x:Key="kb_square">Снимок прямоугольной области экрана</system:String>
     <system:String x:Key="kb_screen">Снимок текущего экрана</system:String>
+    <system:String x:Key="kb_active_window">Снимок активного окна</system:String>
 </ResourceDictionary>

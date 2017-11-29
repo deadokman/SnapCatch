@@ -37,12 +37,12 @@ namespace SnapCatch.ViewModel.SettingsPageViewModel
             _pressedKeys = new HashSet<Keys>();
 
             KeyBindsContainer container;
-            if (KeyBindsHolder.TryGetBindingInfo(ActionTypes.SquareAreaScreenKey, out container))
+            if (KeyBindsEmitter.TryGetBindingInfo(ActionTypes.SquareAreaScreenKey, out container))
             {
                 _squareAreaText = container.KeybindsStr;
             }
 
-            if (KeyBindsHolder.TryGetBindingInfo(ActionTypes.ActiveScreenScreenKey, out container))
+            if (KeyBindsEmitter.TryGetBindingInfo(ActionTypes.ActiveScreenScreenKey, out container))
             {
                 _activeScreenText = container.KeybindsStr;
             }
@@ -51,6 +51,8 @@ namespace SnapCatch.ViewModel.SettingsPageViewModel
         private HashSet<Keys> _pressedKeys;
         private string _squareAreaText;
         private string _activeScreenText;
+        private bool _isActiveWindowFocused;
+        private string _activeWindowText;
 
 
         private void HandleKeyboardEvent(KeyboardEventArgs e)
@@ -87,6 +89,11 @@ namespace SnapCatch.ViewModel.SettingsPageViewModel
                     ActiveScreenText = sb.ToString();
                 }
 
+                if (_isActiveWindowFocused)
+                {
+                    ActiveWindowText = sb.ToString();
+                }
+
                 _pressedKeys.Clear();
             }
 
@@ -115,6 +122,16 @@ namespace SnapCatch.ViewModel.SettingsPageViewModel
             {
                 _activeScreenText = value;
                 RaisePropertyChanged(() => ActiveScreenText);
+            }
+        }
+
+        public string ActiveWindowText
+        {
+            get { return _activeWindowText; }
+            set
+            {
+                _activeWindowText = value;
+                RaisePropertyChanged(() => ActiveWindowText);
             }
         }
 
@@ -157,6 +174,25 @@ namespace SnapCatch.ViewModel.SettingsPageViewModel
                 }
 
                 _isScreenAreaFocused = value;
+            }
+        }
+
+        public bool IsActiveWindowFocused
+        {
+            get { return _isActiveWindowFocused; }
+            set
+            {
+                _isActiveWindowFocused = value;
+                if (value)
+                {
+                    _screenAreaFocusedHandle = KeyboardMonitor.SubscribeExclusiveHandler(HandleKeyboardEvent);
+                }
+                else
+                {
+                    KeyboardMonitor.UnsubscribeExclusiveHandler(_screenAreaFocusedHandle);
+                }
+
+                _isActiveWindowFocused = value;
             }
         }
     }

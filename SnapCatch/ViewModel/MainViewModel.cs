@@ -1,19 +1,11 @@
+using System.Security.Cryptography.X509Certificates;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace SnapCatch.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
+
     public class MainViewModel : ViewModelBase
     {
         /// <summary>
@@ -21,14 +13,29 @@ namespace SnapCatch.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            RestoreWindowCommand = new RelayCommand(() =>
+                {
+                    App.Current.MainWindow.Show();
+                    App.Current.MainWindow.Activate();
+                }
+            );
+
+            DisplaySettings = new RelayCommand(() =>
+            {
+                var sw = new SettingsWindow();
+                sw.Show();
+            });
+
+            CloseAppCommand = new RelayCommand(() =>
+            {
+                App.Current.Shutdown();
+            });
         }
+
+        public ICommand RestoreWindowCommand { get; set; }
+
+        public ICommand DisplaySettings { get; set; }
+
+        public ICommand CloseAppCommand { get; set; }
     }
 }

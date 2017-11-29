@@ -14,6 +14,11 @@
         /// <summary>
         /// Capture active monitor screen
         /// </summary>
-        ActiveScreenScreenKey = 1
+        ActiveScreenScreenKey = 1,
+
+        /// <summary>
+        /// Capture active window screen
+        /// </summary>
+        ActiveWindowScreenKey = 2
     }
 }

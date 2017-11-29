@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace SnapCatch.SupprtControls
+namespace SnapCatch.Processing.SupprtControls
 {
     /// <summary>
     /// Interaction logic for MagnifyCtrl.xaml

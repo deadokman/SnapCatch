@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,11 +27,48 @@ namespace SnapCatch
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+
+        // minimize to system tray when applicaiton is minimized
+        protected override void OnStateChanged(EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+            {
+                this.Hide();
+            }
+
+            base.OnStateChanged(e);
+        }
+
+        // minimize to system tray when applicaiton is closed
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            // setting cancel to true will cancel the close request
+            // so the application is not closed
+            if (Properties.Settings.Default.HideInTrayOnClose)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+
+            base.OnClosing(e);
+        }
+
         public MainWindow()
         {
             InitializeComponent();
-            var settingsWindow = new SettingsWindow();
-            settingsWindow.Show();
+
+            //using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("SnapCatch.Resources.Icons.tray_ico.ico"))
+            //{
+            //    ni.Icon = new System.Drawing.Icon(stream);
+            //}
+
+            //ni.DoubleClick += NiOnDoubleClick;
+            //ni.Visible = true;
+            //this.Hide();
+
+
+            //var settingsWindow = new SettingsWindow();
+            //settingsWindow.Show();
             //            var screens = ScreenRepository.GetScreens();
             //            _tdWindows = new TopDrawWindow[screens.Length];
             //            for (var i = 0; i < screens.Length; i++)

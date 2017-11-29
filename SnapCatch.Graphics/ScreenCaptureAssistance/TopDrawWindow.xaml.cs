@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using SnapCatch.Processing;
 
-namespace SnapCatch
+namespace SnapCatch.Graphics.ScreenCaptureAssistance
 {
     /// <summary>
     /// Interaction logic for TopDrawWindow.xaml

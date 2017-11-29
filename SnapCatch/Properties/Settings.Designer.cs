@@ -106,5 +106,29 @@ namespace SnapCatch.Properties {
                 this["ActiveScreenScreenKey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HideInTrayOnClose {
+            get {
+                return ((bool)(this["HideInTrayOnClose"]));
+            }
+            set {
+                this["HideInTrayOnClose"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ActiveWindowKey {
+            get {
+                return ((bool)(this["ActiveWindowKey"]));
+            }
+            set {
+                this["ActiveWindowKey"] = value;
+            }
+        }
     }
 }

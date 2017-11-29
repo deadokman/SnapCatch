@@ -38,6 +38,14 @@
                      viewModel:FocusExtension.IsFocused="{Binding IsScreenAreaFocused}" 
                      x:Name="ActiveScreenHotKey" IsReadOnly="True">
             </TextBox>
+            <TextBlock Foreground="{DynamicResource TextBrush}" Text="{DynamicResource kb_active_window}"/>
+            <TextBox 
+                GotFocus="ActiveWindowHotKey_OnGotFocus"
+                LostFocus="ActiveWindowHotKey_OnLostFocus"
+                Text="{Binding ActiveWindowText}" 
+                viewModel:FocusExtension.IsFocused="{Binding IsScreenAreaFocused}" 
+                x:Name="ActiveWindowHotKey" IsReadOnly="True">
+            </TextBox>
             <!--End theme block-->
         </StackPanel>
     </ScrollViewer>

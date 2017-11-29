@@ -19,6 +19,7 @@
                     <TextBox Text="{Binding ScreenShotFolder}" Margin="5 0 0 0" HorizontalAlignment="Stretch" IsReadOnly="True"/>
                 </DockPanel>
                 <CheckBox IsChecked="{Binding AutoStartUpProgram}"  Margin="0,2,0,2" Content="{DynamicResource gs_startUp}"></CheckBox>
+                <CheckBox IsChecked="{Binding HideInTrayOnClose}"  Margin="0,2,0,2" Content="{DynamicResource gs_tray_on_close}"></CheckBox>
             </StackPanel>
         </ScrollViewer>
     </Grid>

@@ -43,6 +43,9 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -89,8 +92,14 @@
     </Compile>
     <Compile Include="AdditionalPages\SettingsPages\SettingsItems\SettingsDisplayItem.cs" />
     <Compile Include="Logic\KeyBindsContainer.cs" />
-    <Compile Include="Logic\KeyBindsHolder.cs" />
+    <Compile Include="Logic\KeyBindsEmitter.cs" />
     <Compile Include="Logic\ActionTypes.cs" />
+    <Compile Include="Logic\ScreenCaptureInvocator.cs" />
+    <Compile Include="Logic\ScreenCaptures\ActiveScreenCapturer.cs" />
+    <Compile Include="Logic\ScreenCaptures\ActiveWindowCapturer.cs" />
+    <Compile Include="Logic\ScreenCaptures\CaptureTypeAttribute.cs" />
+    <Compile Include="Logic\ScreenCaptures\IScreenCapturer.cs" />
+    <Compile Include="Logic\ScreenCaptures\SquareAreaScreeenCapturer.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -102,16 +111,6 @@
     </Compile>
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SupprtControls\ImageToViewPostConverter.cs" />
-    <Compile Include="SupprtControls\MagnifyCtrl.xaml.cs">
-      <DependentUpon>MagnifyCtrl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SupprtControls\SquareAreaSelectCtrl.xaml.cs">
-      <DependentUpon>SquareAreaSelectCtrl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TopDrawWindow.xaml.cs">
-      <DependentUpon>TopDrawWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\FocusExtension.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -162,10 +161,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SupprtControls\MagnifyCtrl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -178,14 +173,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SupprtControls\SquareAreaSelectCtrl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TopDrawWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -220,7 +207,9 @@
       <Name>SnapCatch.KeyHook</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Icons\tray_ico.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />
   </ItemGroup>

@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using SnapCatch.Logic;
 using SnapCatch.ViewModel.SettingsPageViewModel;
 
 namespace SnapCatch.ViewModel
@@ -25,6 +26,9 @@ namespace SnapCatch.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+
+        private ScreenCaptureInvocator _invocator;
+
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
@@ -48,6 +52,8 @@ namespace SnapCatch.ViewModel
             SimpleIoc.Default.Register<InterfaceSettingsViewModel>();
             SimpleIoc.Default.Register<GeneralSettingsViewModel>();
             SimpleIoc.Default.Register<KeyBindingsViewModel>();
+
+            _invocator = new ScreenCaptureInvocator();
         }
 
         public MainViewModel Main

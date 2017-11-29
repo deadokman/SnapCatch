@@ -41,6 +41,17 @@ namespace SnapCatch.ViewModel.SettingsPageViewModel
             }
         }
 
+        public bool HideInTrayOnClose
+        {
+            get { return Properties.Settings.Default.HideInTrayOnClose; }
+            set
+            {
+                Properties.Settings.Default.HideInTrayOnClose = value;
+                Properties.Settings.Default.Save();
+                RaisePropertyChanged(() => HideInTrayOnClose);
+            }
+        }
+
         /// <summary>
         /// Запускать программу на старте операционной системы
         /// </summary>
