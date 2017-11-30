@@ -56,53 +56,7 @@ namespace SnapCatch
         public MainWindow()
         {
             InitializeComponent();
-
-            //using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("SnapCatch.Resources.Icons.tray_ico.ico"))
-            //{
-            //    ni.Icon = new System.Drawing.Icon(stream);
-            //}
-
-            //ni.DoubleClick += NiOnDoubleClick;
-            //ni.Visible = true;
-            //this.Hide();
-
-
-            //var settingsWindow = new SettingsWindow();
-            //settingsWindow.Show();
-            //            var screens = ScreenRepository.GetScreens();
-            //            _tdWindows = new TopDrawWindow[screens.Length];
-            //            for (var i = 0; i < screens.Length; i++)
-            //            {
-            //                var sc = screens[i];
-            //                var tmWindow = new TopDrawWindow(sc);
-            //                tmWindow.WindowStartupLocation = WindowStartupLocation.Manual;
-            //                tmWindow.Left = sc.ScreenItem.Bounds.Left;
-            //                tmWindow.Top = sc.ScreenItem.Bounds.Top;
-            //                tmWindow.Width = sc.ScreenItem.Bounds.Width;
-            //                tmWindow.Height = sc.ScreenItem.Bounds.Height;
-            //                tmWindow.ResizeMode = ResizeMode.NoResize;
-            //#if !DEBUG
-            //                tmWindow.Topmost = true;
-            //#endif
-            //                tmWindow.WindowStyle = WindowStyle.None;
-            //                //var hwnd = new WindowInteropHelper(tmWindow).Handle;
-            //                //SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
-            //                _tdWindows[i] = tmWindow;
-            //                tmWindow.Show();
-            //                tmWindow.ScreenAreaCaptured += TmWindowOnScreenAreaCaptured;
         }
     }
-
-    //private void TmWindowOnScreenAreaCaptured(ImageSource screenSnapshot)
-    //{
-    //    foreach (var topDrawWindow in _tdWindows)
-    //    {
-    //        topDrawWindow.Close();
-    //    }
-
-    //    var screenEditWindow = new ScreenEditorWindow();
-    //    screenEditWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-    //    screenEditWindow.Show();
-    //}
 }
 

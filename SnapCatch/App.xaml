@@ -9,7 +9,8 @@
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
             <ResourceDictionary Source="pack://application:,,,/SnapCatch;component/Resources/Icons.xaml" />
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
-            <ResourceDictionary Source="Resources/ControlStylesDictionary.xaml"></ResourceDictionary>
+            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml" />
+            <ResourceDictionary Source="Resources/ControlStylesDictionary.xaml"/>
             <ResourceDictionary Source="Localization/lang.xaml" />
         </ResourceDictionary.MergedDictionaries>
         <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:SnapCatch.ViewModel" />

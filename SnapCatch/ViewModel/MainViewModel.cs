@@ -18,6 +18,9 @@ namespace SnapCatch.ViewModel
         /// </summary>
         public MainViewModel()
         {
+            _width = 300;
+            _height = 300;
+
             RestoreWindowCommand = new RelayCommand(() =>
                 {
                     App.Current.MainWindow.Show();
@@ -41,6 +44,8 @@ namespace SnapCatch.ViewModel
         {
             App.Current.MainWindow.Show();
             App.Current.MainWindow.Activate();
+            Width = img.Width;
+            Height = img.Height;
         }
 
         /// <summary>
