@@ -13,7 +13,7 @@
         <tb:TaskbarIcon IconSource="Resources/Icons/tray_ico.ico" 
                         DoubleClickCommand="{Binding RestoreWindowCommand}">
             <tb:TaskbarIcon.ContextMenu>
-                <ContextMenu>
+                <ContextMenu Background="{DynamicResource ControlBackgroundBrush}">
                     <ContextMenu.Items>
                         <MenuItem Command="{Binding DisplaySettings}" Header="Настройки"/>
                         <MenuItem Command="{Binding CloseAppCommand}" Header="Закрыть"/>
