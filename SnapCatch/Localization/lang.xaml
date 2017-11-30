@@ -3,6 +3,7 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <system:String x:Key="app_name">Trader</system:String>
     <system:String x:Key="app_ver">0.0.0</system:String>
+    <system:String x:Key="app_MainWindowName">Редактор</system:String>
     <!--TaskBar Context menu-->
     <system:String x:Key="tb_settings">Настройки</system:String>
     <system:String x:Key="tb_close_app">Закрыть</system:String>

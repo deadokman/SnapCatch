@@ -11,7 +11,9 @@ namespace SnapCatch.Logic.ScreenCaptures
     {
         public void InvokeCaptureScreen()
         {
-            //throw new NotImplementedException();
+            
         }
+
+        public event ScreenCaptured CaptureScreen;
     }
 }

@@ -36,6 +36,8 @@ namespace SnapCatch.Logic.ScreenCaptures
             }
         }
 
+        public event ScreenCaptured CaptureScreen;
+
         private void TmWindowOnScreenAreaCaptured(ImageSource screenSnapshot)
         {
             foreach (var topDrawWindow in _tdWindows)
@@ -43,6 +45,10 @@ namespace SnapCatch.Logic.ScreenCaptures
                 topDrawWindow.Close();
             }
 
+            if (CaptureScreen != null)
+            {
+                CaptureScreen.Invoke(screenSnapshot);
+            }
 
         }
     }

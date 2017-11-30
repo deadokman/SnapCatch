@@ -4,7 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using GalaSoft.MvvmLight.Ioc;
 using SnapCatch.Logic.ScreenCaptures;
+using SnapCatch.ViewModel;
 
 namespace SnapCatch.Logic
 {
@@ -25,7 +28,26 @@ namespace SnapCatch.Logic
             var attr = typeof(CaptureTypeAttribute);
             var itype = typeof(IScreenCapturer);
             _screenCapturers = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetCustomAttributes(attr, false).Any() && t.GetConstructor(Type.EmptyTypes) != null && t.GetInterface(itype.Name) != null)
-                .Select(t => new { attr = (CaptureTypeAttribute)t.GetCustomAttribute(attr) , instance = (IScreenCapturer)Activator.CreateInstance(t) }).ToDictionary(i => i.attr.ActionType, i => i.instance);
+                .Select(t =>
+                {
+                    var instance = (IScreenCapturer) Activator.CreateInstance(t); 
+                    instance.CaptureScreen += InstanceOnCaptureScreen;
+                    return new
+                    {
+                        attr = (CaptureTypeAttribute) t.GetCustomAttribute(attr),
+                        instance
+                    };
+                }).ToDictionary(i => i.attr.ActionType, i => i.instance);
+        }
+
+        private void InstanceOnCaptureScreen(ImageSource img)
+        {
+            //throw new NotImplementedException();
+            var mainEditorVm = SimpleIoc.Default.GetInstance<MainViewModel>();
+            if (mainEditorVm != null)
+            {
+                mainEditorVm.ActivateEditor(img);
+            }
         }
 
         private void KeyBindsEmitterOnBindedKeyPress(ActionTypes type)
@@ -37,4 +59,6 @@ namespace SnapCatch.Logic
             }
         }
     }
+
+    public delegate void ScreenCaptured(ImageSource img);
 }
