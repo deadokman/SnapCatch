@@ -9,7 +9,9 @@
     <local:MovingThumb.Template>
         <ControlTemplate>
             <!--<Rectangle Fill="Aqua"></Rectangle>-->
-            <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="None" Name="ImageDisplay" Source="{Binding Source}"></Image>
+            <Image RenderOptions.BitmapScalingMode="NearestNeighbor"
+                   RenderOptions.EdgeMode="Aliased"
+                   SnapsToDevicePixels="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="None" Name="ImageDisplay" Source="{Binding Source}"></Image>
         </ControlTemplate>
     </local:MovingThumb.Template>
 </local:MovingThumb>

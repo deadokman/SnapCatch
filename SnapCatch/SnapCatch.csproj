@@ -157,14 +157,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Logic\Resources\DesignerItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Logic\Resources\MoveThumb.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Resources\ControlStylesDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -230,6 +222,10 @@
       <Project>{f0eb6bfa-ce56-489e-9f28-318ff5db7537}</Project>
       <Name>SnapCatch.KeyHook</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ZoomAndPan\ZoomAndPan.csproj">
+      <Project>{468adede-6f5e-40c0-99c9-c6dac4fac934}</Project>
+      <Name>ZoomAndPan</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\tray_ico.ico" />
@@ -246,6 +242,8 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\icons8-settings-40.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Logic\Resources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,7 +11,8 @@
         <Grid>
             <Rectangle Panel.ZIndex="9999" Height="{Binding ElementName=Ctrl, Path=Height}" Width="4" HorizontalAlignment="Center" Opacity=".3" Fill="Black"></Rectangle>
             <Rectangle Panel.ZIndex="9999" Width="{Binding ElementName=Ctrl, Path=Width}" Height="4" VerticalAlignment="Center" Opacity=".3" Fill="Black"></Rectangle>
-            <Image HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None" Panel.ZIndex="1000" x:Name="magnifyImg"></Image>
+            <Image RenderOptions.BitmapScalingMode="NearestNeighbor"
+                   RenderOptions.EdgeMode="Aliased" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None" Panel.ZIndex="1000" x:Name="magnifyImg"></Image>
         </Grid>
     </Border>
 </UserControl>

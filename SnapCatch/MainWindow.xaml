@@ -10,6 +10,32 @@
         x:Name="MainWindowContainer"
         Title="{DynamicResource app_MainWindowName}" Height="350" Width="525" DataContext="{Binding Source={StaticResource Locator}, Path=Main}" Background="{DynamicResource ControlBackgroundBrush}">
     <Grid Background="{DynamicResource AccentColorBrush4}">
+        <Grid.Resources>
+            <ControlTemplate x:Key="ExpanderControlTemplate"  TargetType="{x:Type Expander}">
+                <ControlTemplate.Resources>
+                    <!-- Here are the storyboards which don't work -->
+                    <Storyboard x:Key="ExpandContent">
+
+                        <DoubleAnimation 
+                            Storyboard.TargetName="_expanderContent" 
+                            Storyboard.TargetProperty="Height" 
+                            From="0.0" 
+                            To="{Binding ElementName=_expanderContent,Path=DesiredHeight}"
+                            Duration="0:0:1.0" />
+                    </Storyboard>
+                    <Storyboard x:Key="ContractContent">
+
+                        <DoubleAnimation 
+                            Storyboard.TargetName="_expanderContent" 
+                            Storyboard.TargetProperty="Height" 
+                            From="{Binding ElementName=_expanderContent,Path=DesiredHeight}"
+                            To="0.0"
+                            Duration="0:0:1.0" />
+
+                    </Storyboard>
+                </ControlTemplate.Resources>
+            </ControlTemplate>
+        </Grid.Resources>
         <tb:TaskbarIcon IconSource="Resources/Icons/tray_ico.ico" 
                         DoubleClickCommand="{Binding RestoreWindowCommand}">
             <tb:TaskbarIcon.ContextMenu>
@@ -32,24 +58,31 @@
                     <ColumnDefinition Width="35"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Background="{DynamicResource ControlBackgroundBrush}"></StackPanel>
+                <StackPanel Grid.Column="0" Background="{DynamicResource ControlBackgroundBrush}">
+
+                </StackPanel>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="{DynamicResource AccentBaseColorBrush}">
                         <Border   VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
                             <Border.Effect>
                                 <DropShadowEffect Direction="30" Opacity=".2" Color="{DynamicResource BlackColor}" ShadowDepth="7"></DropShadowEffect>
                             </Border.Effect>
-                            <ItemsControl ItemsSource="{Binding DrawingLayers }">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <Canvas Width="{Binding Width}" Height="{Binding Height}">
-                                            <Canvas.RenderTransform>
-                                                <ScaleTransform ScaleX="{Binding WorkAreaScaleFactor}" CenterX="{Binding ImageCenterX}" CenterY="{Binding ImageCenterY}"></ScaleTransform>
-                                            </Canvas.RenderTransform>
-                                        </Canvas>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                            </ItemsControl>
+                            <Viewbox RenderOptions.EdgeMode="Aliased" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Stretch="Uniform">
+                                <ItemsControl ItemsSource="{Binding DrawingLayers }">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <Canvas RenderOptions.EdgeMode="Aliased" SnapsToDevicePixels="True" Width="{Binding Width}" Height="{Binding Height}">
+                                                <Canvas.LayoutTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform  ScaleX="{Binding WorkAreaScaleFactor}" ScaleY="{Binding WorkAreaScaleFactor}" CenterX="{Binding ImageCenterX}" CenterY="{Binding ImageCenterY}"/>
+                                                        <TranslateTransform ></TranslateTransform>
+                                                    </TransformGroup>
+                                                </Canvas.LayoutTransform>
+                                            </Canvas>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </Viewbox>
                         </Border>
                     </Border>
                 </ScrollViewer>
@@ -57,7 +90,12 @@
             <StatusBar x:Name="StatusBar" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="2" Background="{DynamicResource AccentBaseColorBrush}">
                 <DockPanel LastChildFill="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=MainWindowContainer, Path=Width}">
                     <TextBlock  Margin="4,0,4,0" Text="100%" Background="{DynamicResource AccentColorBrush2}"></TextBlock>
-                    <Slider Margin="0,0,16,0" TickPlacement="None" Foreground="{DynamicResource TextBoxBorderBrush}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    <Slider Margin="0,0,16,0" 
+                            Value="{Binding SliderValue}"
+                            TickPlacement="None" 
+                            Foreground="{DynamicResource TextBoxBorderBrush}" 
+                            VerticalAlignment="Stretch" 
+                            HorizontalAlignment="Stretch"
                             TickFrequency="10" Ticks="29" Minimum="0" Maximum="300" Style="{DynamicResource FlatSlider}"></Slider>
                 </DockPanel>
             </StatusBar>

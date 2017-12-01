@@ -106,7 +106,7 @@ namespace SnapCatch.ViewModel
             set
             {
                 _value = value;
-                WorkAreaScaleFactor = 1 + value / 1000;
+                WorkAreaScaleFactor = 1 + value / 10;
             }
         }
 
