@@ -94,6 +94,10 @@
     <Compile Include="Logic\Drawing\DrawingLayer.xaml.cs">
       <DependentUpon>DrawingLayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Logic\Drawing\MovingImageThumb.xaml.cs">
+      <DependentUpon>MovingImageThumb.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Logic\Drawing\MovingThumb.cs" />
     <Compile Include="Logic\KeyBindsContainer.cs" />
     <Compile Include="Logic\KeyBindsEmitter.cs" />
     <Compile Include="Logic\ActionTypes.cs" />
@@ -103,6 +107,7 @@
     <Compile Include="Logic\ScreenCaptures\CaptureTypeAttribute.cs" />
     <Compile Include="Logic\ScreenCaptures\IScreenCapturer.cs" />
     <Compile Include="Logic\ScreenCaptures\SquareAreaScreeenCapturer.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -145,6 +150,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Logic\Drawing\DrawingLayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Logic\Drawing\MovingImageThumb.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Logic\Resources\DesignerItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Logic\Resources\MoveThumb.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,5 +246,6 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\icons8-settings-40.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

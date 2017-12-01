@@ -1,9 +1,12 @@
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using SnapCatch.Logic.Drawing;
 
 namespace SnapCatch.ViewModel
 {
@@ -12,6 +15,10 @@ namespace SnapCatch.ViewModel
     {
         private double _width;
         private double _height;
+        private double _imageCenterX;
+        private double _imageCenterY;
+        private double _workAreaScaleFactor;
+        private double _value;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -20,7 +27,9 @@ namespace SnapCatch.ViewModel
         {
             _width = 300;
             _height = 300;
+            SliderValue = 0;
 
+            DrawingLayers = new ObservableCollection<DrawingLayer>();
             RestoreWindowCommand = new RelayCommand(() =>
                 {
                     App.Current.MainWindow.Show();
@@ -46,6 +55,19 @@ namespace SnapCatch.ViewModel
             App.Current.MainWindow.Activate();
             Width = img.Width;
             Height = img.Height;
+            var dl = new DrawingLayer();
+            Canvas.SetTop(dl, 0);
+            Canvas.SetLeft(dl, 0);
+            dl.Width = img.Width;
+            dl.Height = img.Height;
+            var mt = new MovingImageThumb();
+            mt.Source = img;
+            mt.Width = img.Width;
+            mt.Height = img.Height;
+            Canvas.SetLeft(mt, 0);
+            Canvas.SetTop(mt, 0);
+            dl.AddItem(mt);
+            DrawingLayers.Add(dl);
         }
 
         /// <summary>
@@ -58,6 +80,49 @@ namespace SnapCatch.ViewModel
             Height = size.Height;
         }
 
+        public double ImageCenterX
+        {
+            get { return _imageCenterX; }
+            private set
+            {
+                _imageCenterX = value;
+                RaisePropertyChanged(() => ImageCenterX);
+            }
+        }
+
+        public double ImageCenterY
+        {
+            get { return _imageCenterY; }
+            private set
+            {
+                _imageCenterY = value;
+                RaisePropertyChanged(() => ImageCenterY);
+            }
+        }
+
+        public double SliderValue
+        {
+            get { return _value; }
+            set
+            {
+                _value = value;
+                WorkAreaScaleFactor = 1 + value / 1000;
+            }
+        }
+
+        /// <summary>
+        /// Work area scalling value
+        /// </summary>
+        public double WorkAreaScaleFactor
+        {
+            get { return _workAreaScaleFactor; }
+            set
+            {
+                _workAreaScaleFactor = value;
+                RaisePropertyChanged(() => WorkAreaScaleFactor);
+            }
+        }
+
         /// <summary>
         /// WorkArea width
         /// </summary>
@@ -66,7 +131,8 @@ namespace SnapCatch.ViewModel
             get { return _width; }
             set
             {
-                _width = value; 
+                _width = value;
+                ImageCenterX = _width / 2;
                 RaisePropertyChanged(() => Width);
             }
         }
@@ -79,10 +145,13 @@ namespace SnapCatch.ViewModel
             get { return _height; }
             set
             {
-                _height = value; 
+                _height = value;
+                ImageCenterY = Height / 2;
                 RaisePropertyChanged(() => Height);
             }
         }
+
+        public ObservableCollection<DrawingLayer> DrawingLayers { get; set; }
 
         /// <summary>
         /// Restore window, invokes after TrayIcon double click

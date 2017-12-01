@@ -33,20 +33,32 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Background="{DynamicResource ControlBackgroundBrush}"></StackPanel>
-                <Border Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="{DynamicResource AccentBaseColorBrush}">
-                    <Border   VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
-                        <Border.Effect>
-                            <DropShadowEffect Direction="30" Opacity=".1" Color="{DynamicResource AccentColor4}" ShadowDepth="4"></DropShadowEffect>
-                        </Border.Effect>
-                        <Canvas Background="White"  x:Name="WorkArea" Width="{Binding Width}" Height="{Binding Height}" ClipToBounds="True"></Canvas>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="{DynamicResource AccentBaseColorBrush}">
+                        <Border   VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+                            <Border.Effect>
+                                <DropShadowEffect Direction="30" Opacity=".2" Color="{DynamicResource BlackColor}" ShadowDepth="7"></DropShadowEffect>
+                            </Border.Effect>
+                            <ItemsControl ItemsSource="{Binding DrawingLayers }">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas Width="{Binding Width}" Height="{Binding Height}">
+                                            <Canvas.RenderTransform>
+                                                <ScaleTransform ScaleX="{Binding WorkAreaScaleFactor}" CenterX="{Binding ImageCenterX}" CenterY="{Binding ImageCenterY}"></ScaleTransform>
+                                            </Canvas.RenderTransform>
+                                        </Canvas>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </Border>
                     </Border>
-                </Border>
+                </ScrollViewer>
             </Grid>
             <StatusBar x:Name="StatusBar" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="2" Background="{DynamicResource AccentBaseColorBrush}">
                 <DockPanel LastChildFill="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=MainWindowContainer, Path=Width}">
                     <TextBlock  Margin="4,0,4,0" Text="100%" Background="{DynamicResource AccentColorBrush2}"></TextBlock>
                     <Slider Margin="0,0,16,0" TickPlacement="None" Foreground="{DynamicResource TextBoxBorderBrush}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                            TickFrequency="10" Ticks="29" Minimum="10" Maximum="300" Style="{DynamicResource FlatSlider}"></Slider>
+                            TickFrequency="10" Ticks="29" Minimum="0" Maximum="300" Style="{DynamicResource FlatSlider}"></Slider>
                 </DockPanel>
             </StatusBar>
         </Grid>

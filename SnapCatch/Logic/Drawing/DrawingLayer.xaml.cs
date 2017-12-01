@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace SnapCatch.Logic.Drawing
 {
@@ -11,5 +12,12 @@ namespace SnapCatch.Logic.Drawing
         {
             InitializeComponent();
         }
+
+        public void AddItem(MovingThumb canvasItem)
+        {
+            CanvasDisplay.Children.Add(canvasItem);
+
+        }
+
     }
 }
