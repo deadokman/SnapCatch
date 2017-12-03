@@ -77,7 +77,6 @@ namespace SnapCatch.AdditionalControl
             {
                 _widthCollapseAnimation.From = _expandWidth;
                 _widthCollapseAnimation.To = _initialWidth;
-
             }
 
             BeginAnimation(WidthProperty, _widthCollapseAnimation);

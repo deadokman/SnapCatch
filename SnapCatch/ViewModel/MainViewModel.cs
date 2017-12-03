@@ -1,12 +1,13 @@
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using SnapCatch.Logic.Drawing;
+using Size = System.Drawing.Size;
 
 namespace SnapCatch.ViewModel
 {
@@ -51,8 +52,8 @@ namespace SnapCatch.ViewModel
 
         public void ActivateEditor(ImageSource img)
         {
-            App.Current.MainWindow.Show();
-            App.Current.MainWindow.Activate();
+            Application.Current.MainWindow.Show();
+            Application.Current.MainWindow.Activate();
             Width = img.Width;
             Height = img.Height;
             var dl = new DrawingLayer();

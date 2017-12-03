@@ -57,12 +57,33 @@
                 <Canvas Grid.Column="0" Background="{DynamicResource ControlBackgroundBrush}">
                     <additionalControl:ExpandableButton Width="40" Height="40">
                         <additionalControl:ExpandableButton.AdditionalContent>
-                            <DockPanel>
-                                <Button Width="40" Content="A"></Button>
-                                <Button Width="40" Content="B"></Button>
-                                <Button Width="40" Content="C"></Button>
-                                <Button Width="40" Content="D"></Button>
-                            </DockPanel>
+                            <ListBox  ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
+                                      ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                                      VerticalContentAlignment="Stretch" 
+                                      HorizontalAlignment="Stretch" 
+                                      HorizontalContentAlignment="Center"
+                                      VerticalAlignment="Center">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListBoxItem}">
+                                        <Setter Property="DockPanel.Dock" Value="{Binding Dock}"/>
+                                        <Setter Property="Margin" Value="0"></Setter>
+                                        <Setter Property="Padding" Value="0"></Setter>
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <ToggleButton Content="afafa" Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type additionalControl:ExpandableButton}}, Path=Height}" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type additionalControl:ExpandableButton}}, Path=Width}"></ToggleButton>
+                                                </DataTemplate>
+                                            </Setter.Value> 
+                                        </Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsItemsHost="True">
+                                        </DockPanel>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
                         </additionalControl:ExpandableButton.AdditionalContent>
                     </additionalControl:ExpandableButton>
                     <additionalControl:ExpandableButton Canvas.Top="40" Width="40" Height="40"></additionalControl:ExpandableButton>

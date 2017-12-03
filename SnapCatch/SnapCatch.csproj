@@ -110,6 +110,8 @@
     <Compile Include="Logic\ScreenCaptures\CaptureTypeAttribute.cs" />
     <Compile Include="Logic\ScreenCaptures\IScreenCapturer.cs" />
     <Compile Include="Logic\ScreenCaptures\SquareAreaScreeenCapturer.cs" />
+    <Compile Include="Logic\Tools\ImageToolBase.cs" />
+    <Compile Include="Logic\Tools\PointTool.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
