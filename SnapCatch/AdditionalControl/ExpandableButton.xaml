@@ -6,17 +6,43 @@
              xmlns:local="clr-namespace:SnapCatch.AdditionalControl"
              mc:Ignorable="d"
              d:DesignHeight="50" d:DesignWidth="50" x:Name="MainCtrl" Background="{DynamicResource ControlBackgroundBrush}">
-    <Border BorderThickness="0,0,0,1" BorderBrush="{DynamicResource AccentColorBrush}">
+    <Border BorderThickness="0,0,0,0" BorderBrush="{DynamicResource AccentColorBrush}">
         <ContentControl>
-            <Grid>
+            <Grid Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=Height}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition x:Name="ButtonExpandWidth" Width="{Binding Path=ExpandButtonWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
                 </Grid.ColumnDefinitions>
-                <ContentPresenter Content="{Binding AdditionalContent, ElementName=MainCtrl}" Grid.Column="0" x:Name="ContentPresenter">
+                <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                         Height="{Binding ElementName=MainCtrl, Path=Height}"
+                         VerticalContentAlignment="Top"
+                         Width="10000"
+                         HorizontalContentAlignment="Center"
+                         VerticalAlignment="Center"
+                         ItemTemplate="{Binding Path=ItemTemplate, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                         ItemsSource="{Binding Path=Items,  RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Column="0" x:Name="ListBoxTarget">
 
-
-                </ContentPresenter>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Focusable" Value="false"/>
+                            <Setter Property="Margin" Value="0"></Setter>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Left" IsItemsHost="True">
+                            </StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
                 <Button Style="{StaticResource MetroFlatAccentButton}" Margin="0,0,0,0" Click="Button_Click" BorderThickness="0" Grid.Column="1"></Button>
             </Grid>
         </ContentControl>

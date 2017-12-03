@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using MahApps.Metro.Controls;
 using MahApps.Metro.SimpleChildWindow.Utils;
 
 namespace SnapCatch.AdditionalControl
@@ -55,16 +59,16 @@ namespace SnapCatch.AdditionalControl
             if (_expandWidth == 0)
             {
                 _initialWidth = this.ActualWidth;
-                foreach (var depObj in InternalUiElement.GetChildObjects())
+                foreach (var item in ListBoxTarget.Items)
                 {
-                    var uiEl = depObj as Control;
-                    if (uiEl != null)
+                    ListBoxItem container = ListBoxTarget.ItemContainerGenerator.ContainerFromItem(item) as ListBoxItem;
+                    if (container != null)
                     {
-                        _expandWidth += uiEl.Width;
+                        _expandWidth += container.ActualWidth;
                     }
                 }
 
-                _widthExpandAnimation.To = _expandWidth > _widthExpandAnimation.From ? _expandWidth : _initialWidth;
+                _widthExpandAnimation.To = _expandWidth > _widthExpandAnimation.From ? _expandWidth + 5 : _initialWidth;
                 _widthExpandAnimation.From = _initialWidth;
             }
 
@@ -87,6 +91,54 @@ namespace SnapCatch.AdditionalControl
             Expanded = !Expanded;
         }
 
+        #region Button expand width
+
+        public static readonly DependencyProperty ExpandButtonWidthProperty = DependencyProperty.Register(
+            "ExpandButtonWidth", typeof(double), typeof(ExpandableButton), new PropertyMetadata((double)5));
+
+        public double ExpandButtonWidth
+        {
+            get { return (double) GetValue(ExpandButtonWidthProperty); }
+            set { SetValue(ExpandButtonWidthProperty, value); }
+        }
+
+        #endregion
+
+        #region ItemTemplate property
+
+        public static readonly DependencyProperty ItemTemplateProperty =
+            DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(ExpandableButton), new UIPropertyMetadata(null));
+
+        public DataTemplate ItemTemplate
+        {
+            get { return (DataTemplate)GetValue(ItemTemplateProperty); }
+            set { SetValue(ItemTemplateProperty, value); }
+        }
+
+        #endregion
+
+        #region Items Property
+
+        public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(
+            "Items", typeof(IEnumerable<object>), typeof(ExpandableButton), 
+            new PropertyMetadata(default(IEnumerable<object>), PropertyChangedCallback));
+
+        private static void PropertyChangedCallback(DependencyObject dobj, DependencyPropertyChangedEventArgs dp)
+        {
+
+            
+        }
+
+        public IEnumerable<object> Items
+        {
+            get { return (IEnumerable<object>) GetValue(ItemsProperty); }
+            set { SetValue(ItemsProperty, value); }
+        }
+
+        #endregion
+
+        #region Expanded property
+
         /// <summary>
         /// Control expanded dependency property
         /// </summary>
@@ -95,7 +147,7 @@ namespace SnapCatch.AdditionalControl
 
         public bool Expanded
         {
-            get { return (bool) GetValue(ExpandedProperty); }
+            get { return (bool)GetValue(ExpandedProperty); }
             set
             {
                 SetValue(ExpandedProperty, value);
@@ -110,12 +162,16 @@ namespace SnapCatch.AdditionalControl
             }
         }
 
+        #endregion
+
+        #region AdditionalContent Property
+
         /// <summary>
         /// Control internal content
         /// </summary>
         public static readonly DependencyProperty AdditionalContentProperty =
             DependencyProperty.Register("AdditionalContent", typeof(object), typeof(ExpandableButton),
-              new PropertyMetadata(null, PropertyContentChanged));
+                new PropertyMetadata(null, PropertyContentChanged));
 
         /// <summary>
         /// Gets or sets additional content for the UserControl
@@ -134,5 +190,7 @@ namespace SnapCatch.AdditionalControl
             var exBtn = (ExpandableButton)d;
             exBtn.InternalUiElement = (UIElement)e.NewValue;
         }
+
+        #endregion
     }
 }

@@ -54,40 +54,30 @@
                         </Border>
                     </Border>
                 </ScrollViewer>
-                <Canvas Grid.Column="0" Background="{DynamicResource ControlBackgroundBrush}">
-                    <additionalControl:ExpandableButton Width="40" Height="40">
-                        <additionalControl:ExpandableButton.AdditionalContent>
-                            <ListBox  ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
-                                      ScrollViewer.VerticalScrollBarVisibility="Disabled" 
-                                      VerticalContentAlignment="Stretch" 
-                                      HorizontalAlignment="Stretch" 
-                                      HorizontalContentAlignment="Center"
-                                      VerticalAlignment="Center">
-                                <ListBox.ItemContainerStyle>
-                                    <Style TargetType="{x:Type ListBoxItem}">
-                                        <Setter Property="DockPanel.Dock" Value="{Binding Dock}"/>
-                                        <Setter Property="Margin" Value="0"></Setter>
-                                        <Setter Property="Padding" Value="0"></Setter>
-                                        <Setter Property="ContentTemplate">
-                                            <Setter.Value>
-                                                <DataTemplate>
-                                                    <ToggleButton Content="afafa" Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type additionalControl:ExpandableButton}}, Path=Height}" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type additionalControl:ExpandableButton}}, Path=Width}"></ToggleButton>
-                                                </DataTemplate>
-                                            </Setter.Value> 
-                                        </Setter>
-                                    </Style>
-                                </ListBox.ItemContainerStyle>
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsItemsHost="True">
-                                        </DockPanel>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                            </ListBox>
-                        </additionalControl:ExpandableButton.AdditionalContent>
-                    </additionalControl:ExpandableButton>
-                    <additionalControl:ExpandableButton Canvas.Top="40" Width="40" Height="40"></additionalControl:ExpandableButton>
-                </Canvas>
+                <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentBaseColorBrush}">
+                    <Canvas  Background="{DynamicResource ControlBackgroundBrush}">
+                        <additionalControl:ExpandableButton ExpandButtonWidth="5" Width="45" Height="40" Items="{Binding PointToolItems}">
+                            <additionalControl:ExpandableButton.ItemTemplate>
+                                <DataTemplate>
+                                    <ToggleButton Style="{StaticResource MetroCircleToggleButtonStyle}"
+                                                      Height="{Binding Path=Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type additionalControl:ExpandableButton}}}"
+                                                      Width="40">
+                                    </ToggleButton>
+                                </DataTemplate>
+                            </additionalControl:ExpandableButton.ItemTemplate>
+                        </additionalControl:ExpandableButton>
+                        <additionalControl:ExpandableButton Canvas.Top="40" ExpandButtonWidth="5" Width="45" Height="40" Items="{Binding PointToolItems}">
+                            <additionalControl:ExpandableButton.ItemTemplate>
+                                <DataTemplate>
+                                    <ToggleButton Style="{StaticResource MetroCircleToggleButtonStyle}"
+                                                  Height="{Binding Path=Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type additionalControl:ExpandableButton}}}"
+                                                  Width="40">
+                                    </ToggleButton>
+                                </DataTemplate>
+                            </additionalControl:ExpandableButton.ItemTemplate>
+                        </additionalControl:ExpandableButton>
+                    </Canvas>
+                </Border>
             </Grid>
             <StatusBar x:Name="StatusBar" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="2" Background="{DynamicResource AccentBaseColorBrush}">
                 <DockPanel LastChildFill="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=MwndContainer, Path=Width}">
