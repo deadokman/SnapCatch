@@ -108,7 +108,7 @@ namespace SnapCatch
                 }
 
                 //4. Вызываем евент для оповещения всех окон.
-                LanguageChanged(Current, new EventArgs());
+                LanguageChanged?.Invoke(Current, new EventArgs());
             }
         }
 

@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SnapCatch.AdditionalControl"
              mc:Ignorable="d"
+             MouseEnter="ExpandableButton_OnMouseEnter"
+             MouseLeave="ExpandableButton_OnMouseLeave"
              d:DesignHeight="50" d:DesignWidth="50" x:Name="MainCtrl" Background="{DynamicResource ControlBackgroundBrush}">
     <Border BorderThickness="0,0,0,0" BorderBrush="{DynamicResource AccentColorBrush}">
         <ContentControl>
@@ -17,7 +19,7 @@
                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
                          Height="{Binding ElementName=MainCtrl, Path=Height}"
                          VerticalContentAlignment="Top"
-                         Width="10000"
+                         Width="1000"
                          HorizontalContentAlignment="Center"
                          VerticalAlignment="Center"
                          ItemTemplate="{Binding Path=ItemTemplate, RelativeSource={RelativeSource AncestorType=UserControl}}" 
@@ -31,7 +33,7 @@
                             <Setter Property="Padding" Value="0"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"></Setter>
+                                    <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"></Setter>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -43,7 +45,7 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                 </ListBox>
-                <Button Style="{StaticResource MetroFlatAccentButton}" Margin="0,0,0,0" Click="Button_Click" BorderThickness="0" Grid.Column="1"></Button>
+                <Button Style="{DynamicResource MetroFlatAccentButton}" Margin="0,0,0,0" Click="Button_Click" BorderThickness="0" Grid.Column="1"></Button>
             </Grid>
         </ContentControl>
     </Border>

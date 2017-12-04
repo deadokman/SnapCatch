@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SnapCatch.Logic.Tools
 {
-    public abstract class ImageToolBase
+    public class SnapCatchToolAttribute : Attribute
     {
+        public int OrderIndex { get; private set; }
 
-
-        public ImageToolBase()
+        public SnapCatchToolAttribute(int order)
         {
-            
+            OrderIndex = order;
         }
     }
 }

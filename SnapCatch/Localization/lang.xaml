@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:resources="clr-namespace:SnapCatch.Resources">
     <system:String x:Key="app_name">Trader</system:String>
     <system:String x:Key="app_ver">0.0.0</system:String>
     <system:String x:Key="app_MainWindowName">Редактор</system:String>
@@ -27,4 +28,14 @@
     <system:String x:Key="kb_square">Снимок прямоугольной области экрана</system:String>
     <system:String x:Key="kb_screen">Снимок текущего экрана</system:String>
     <system:String x:Key="kb_active_window">Снимок активного окна</system:String>
+    <!--Main form buttons-->
+    <system:String x:Key="mfb_to_clipboard">Скопировать в буфер обмена</system:String>
+    <system:String x:Key="mfb_save">Сохранить изображение</system:String>
+    <system:String x:Key="mfb_upload">Выложить</system:String>
+    <!--Tools localization-->
+    <system:String x:Key="{x:Static resources:ResourceConstants.PointerLangToolTip}">Выбор</system:String>
+    <system:String x:Key="{x:Static resources:ResourceConstants.PointerMoverToolTip}">Перемещение</system:String>
+    <system:String x:Key="{x:Static resources:ResourceConstants.PointerLayerMoverToolTip}">Перемещение слоя</system:String>
+    <!-- Tools group localization-->
+    <system:String x:Key="{x:Static resources:ResourceConstants.PointerToolsGroup}">Указатели</system:String>
 </ResourceDictionary>

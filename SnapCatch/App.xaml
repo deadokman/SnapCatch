@@ -11,7 +11,8 @@
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml" />
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.Buttons.xaml" />
-                <ResourceDictionary Source="Resources/ControlStylesDictionary.xaml"/>
+            <ResourceDictionary Source="Resources/ControlStylesDictionary.xaml"/>
+            <ResourceDictionary Source="Resources/ToolsResourcePatch.xaml"></ResourceDictionary>
             <ResourceDictionary Source="Resources/AdditionalMetroStyles.xaml"></ResourceDictionary>
             <ResourceDictionary Source="Localization/lang.xaml" />
         </ResourceDictionary.MergedDictionaries>

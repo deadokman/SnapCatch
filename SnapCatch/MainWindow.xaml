@@ -12,32 +12,6 @@
         Title="{DynamicResource app_MainWindowName}" Height="600" Width="920" DataContext="{Binding Source={StaticResource Locator}, Path=Main}" 
                       Background="{DynamicResource ControlBackgroundBrush}">
     <Grid Background="{DynamicResource AccentColorBrush4}">
-        <Grid.Resources>
-            <ControlTemplate x:Key="ExpanderControlTemplate"  TargetType="{x:Type Expander}">
-                <ControlTemplate.Resources>
-                    <!-- Here are the storyboards which don't work -->
-                    <Storyboard x:Key="ExpandContent">
-
-                        <DoubleAnimation 
-                            Storyboard.TargetName="_expanderContent" 
-                            Storyboard.TargetProperty="Height" 
-                            From="0.0" 
-                            To="{Binding ElementName=_expanderContent,Path=DesiredHeight}"
-                            Duration="0:0:1.0" />
-                    </Storyboard>
-                    <Storyboard x:Key="ContractContent">
-
-                        <DoubleAnimation 
-                            Storyboard.TargetName="_expanderContent" 
-                            Storyboard.TargetProperty="Height" 
-                            From="{Binding ElementName=_expanderContent,Path=DesiredHeight}"
-                            To="0.0"
-                            Duration="0:0:1.0" />
-
-                    </Storyboard>
-                </ControlTemplate.Resources>
-            </ControlTemplate>
-        </Grid.Resources>
         <tb:TaskbarIcon IconSource="Resources/Icons/tray_ico.ico" 
                         DoubleClickCommand="{Binding RestoreWindowCommand}">
             <tb:TaskbarIcon.ContextMenu>
@@ -88,30 +62,97 @@
                         </Border>
                     </Border>
                 </ScrollViewer>
-                <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentBaseColorBrush}">
-                    <Canvas  Background="{DynamicResource ControlBackgroundBrush}">
-                        <additionalControl:ExpandableButton ExpandButtonWidth="5" Width="45" Height="40" Items="{Binding PointToolItems}">
-                            <additionalControl:ExpandableButton.ItemTemplate>
-                                <DataTemplate>
-                                    <ToggleButton Style="{StaticResource MetroCircleToggleButtonStyle}"
-                                                      Height="{Binding Path=Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type additionalControl:ExpandableButton}}}"
-                                                      Width="40">
-                                    </ToggleButton>
-                                </DataTemplate>
-                            </additionalControl:ExpandableButton.ItemTemplate>
-                        </additionalControl:ExpandableButton>
-                        <additionalControl:ExpandableButton Canvas.Top="40" ExpandButtonWidth="5" Width="45" Height="40" Items="{Binding PointToolItems}">
-                            <additionalControl:ExpandableButton.ItemTemplate>
-                                <DataTemplate>
-                                    <ToggleButton Style="{StaticResource MetroCircleToggleButtonStyle}"
-                                                  Height="{Binding Path=Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type additionalControl:ExpandableButton}}}"
-                                                  Width="40">
-                                    </ToggleButton>
-                                </DataTemplate>
-                            </additionalControl:ExpandableButton.ItemTemplate>
-                        </additionalControl:ExpandableButton>
-                    </Canvas>
-                </Border>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentBaseColorBrush}">
+                        <Canvas  Background="{DynamicResource ControlBackgroundBrush}">
+                            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                     Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Canvas}, Path=Height}"
+                                     Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Canvas}, Path=Width}"
+                                     HorizontalContentAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     ItemsSource="{Binding ToolManager.ToolGroups}">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListBoxItem}">
+                                        <Setter Property="Focusable" Value="false"/>
+                                        <Setter Property="Margin" Value="0"></Setter>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"></Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <additionalControl:ExpandableButton ExpandButtonWidth="5" Width="45" Height="40" Items="{Binding Tools}">
+                                            <additionalControl:ExpandableButton.ItemTemplate>
+                                                <DataTemplate>
+                                                    <ToggleButton IsChecked="{Binding IsSelected}"
+                                                                  ToolTip="{Binding ToolName}"
+                                                                  Style="{StaticResource MetroToggleFlatAccentButton}" Height="{Binding Path=Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type additionalControl:ExpandableButton}}}"
+                                                                  Width="40">
+                                                        <Rectangle Width="20"
+                                                                   Height="20"
+                                                                   Fill="{DynamicResource TextBrush}">
+                                                            <Rectangle.OpacityMask>
+                                                                <VisualBrush Stretch="None"
+                                                                             Visual="{Binding ToolImagePath}"/>
+                                                            </Rectangle.OpacityMask>
+                                                        </Rectangle>
+                                                    </ToggleButton>
+                                                </DataTemplate>
+                                            </additionalControl:ExpandableButton.ItemTemplate>
+                                        </additionalControl:ExpandableButton>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Canvas>
+                    </Border>
+                    <Border Grid.Row="1" BorderThickness="0,3,1,0" BorderBrush="{DynamicResource AccentBaseColorBrush}">
+                        <StackPanel  >
+                            <Button ToolTip="{DynamicResource mfb_save}" Style="{DynamicResource MetroFlatBaseButton}" VerticalAlignment="Stretch" Height="35">
+                                <Rectangle Width="20"
+                                           Height="20"
+                                           Fill="{DynamicResource TextBrush}">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="UniformToFill"
+                                                     Visual="{StaticResource appbar_save}"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Button>
+                            <Button ToolTip="{DynamicResource mfb_to_clipboard}" Style="{DynamicResource MetroFlatBaseButton}" VerticalAlignment="Stretch" Height="35">
+                                <Rectangle Width="20"
+                                           Height="20"
+                                           Fill="{DynamicResource TextBrush}">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="Uniform"
+                                                     Visual="{StaticResource appbar_clipboard}"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Button>
+                            <Button ToolTip="{DynamicResource mfb_upload}" Style="{DynamicResource MetroFlatBaseButton}"
+                                    VerticalAlignment="Stretch" 
+                                    Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Path=Width}"
+                                    Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Path=Width}">
+                                <Rectangle Width="20"
+                                           Height="20"
+                                           Fill="{DynamicResource TextBrush}">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="Uniform"
+                                                     Visual="{StaticResource appbar_cloud_upload}"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </Grid>
             </Grid>
             <StatusBar x:Name="StatusBar" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="2" Background="{DynamicResource AccentBaseColorBrush}">
                 <DockPanel LastChildFill="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=MwndContainer, Path=Width}">

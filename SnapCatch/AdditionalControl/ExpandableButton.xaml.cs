@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 using MahApps.Metro.Controls;
 using MahApps.Metro.SimpleChildWindow.Utils;
@@ -58,7 +59,7 @@ namespace SnapCatch.AdditionalControl
         {
             if (_expandWidth == 0)
             {
-                _initialWidth = this.ActualWidth;
+                _initialWidth = ActualWidth;
                 foreach (var item in ListBoxTarget.Items)
                 {
                     ListBoxItem container = ListBoxTarget.ItemContainerGenerator.ContainerFromItem(item) as ListBoxItem;
@@ -70,9 +71,15 @@ namespace SnapCatch.AdditionalControl
 
                 _widthExpandAnimation.To = _expandWidth > _widthExpandAnimation.From ? _expandWidth + 5 : _initialWidth;
                 _widthExpandAnimation.From = _initialWidth;
+                _widthExpandAnimation.Freeze();
             }
 
-            BeginAnimation(WidthProperty, _widthExpandAnimation);
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                BeginAnimation(WidthProperty, _widthExpandAnimation);
+            }));
+
+
         }
 
         public void InvokeCollapse()
@@ -81,6 +88,7 @@ namespace SnapCatch.AdditionalControl
             {
                 _widthCollapseAnimation.From = _expandWidth;
                 _widthCollapseAnimation.To = _initialWidth;
+                _widthCollapseAnimation.Freeze();
             }
 
             BeginAnimation(WidthProperty, _widthCollapseAnimation);
@@ -192,5 +200,15 @@ namespace SnapCatch.AdditionalControl
         }
 
         #endregion
+
+        private void ExpandableButton_OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            Expanded = true;
+        }
+
+        private void ExpandableButton_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            Expanded = false;
+        }
     }
 }

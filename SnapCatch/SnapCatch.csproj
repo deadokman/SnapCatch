@@ -101,6 +101,7 @@
       <DependentUpon>MovingImageThumb.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\Drawing\MovingThumb.cs" />
+    <Compile Include="Logic\Extensions.cs" />
     <Compile Include="Logic\KeyBindsContainer.cs" />
     <Compile Include="Logic\KeyBindsEmitter.cs" />
     <Compile Include="Logic\ActionTypes.cs" />
@@ -110,8 +111,14 @@
     <Compile Include="Logic\ScreenCaptures\CaptureTypeAttribute.cs" />
     <Compile Include="Logic\ScreenCaptures\IScreenCapturer.cs" />
     <Compile Include="Logic\ScreenCaptures\SquareAreaScreeenCapturer.cs" />
-    <Compile Include="Logic\Tools\ImageToolBase.cs" />
-    <Compile Include="Logic\Tools\PointTool.cs" />
+    <Compile Include="Logic\Tools\SnapCatchToolAttribute.cs" />
+    <Compile Include="Logic\Tools\ToolItems\MoverTool.cs" />
+    <Compile Include="Logic\Tools\ToolItems\LayerMoverTool.cs" />
+    <Compile Include="Resources\ResourceConstants.cs" />
+    <Compile Include="Logic\Tools\ToolBase.cs" />
+    <Compile Include="Logic\Tools\ToolItems\PointTool.cs" />
+    <Compile Include="Logic\Tools\ToolsGroup.cs" />
+    <Compile Include="Logic\Tools\ToolsManager.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -181,6 +188,10 @@
     <Page Include="Resources\IconsNonShared.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ToolsResourcePatch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ScreenEditorWindow.xaml">
       <SubType>Designer</SubType>
@@ -257,6 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logic\Resources\" />
+    <Folder Include="Logic\Tools\ToolItems\VectorTools\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
