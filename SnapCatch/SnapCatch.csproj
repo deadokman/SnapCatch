@@ -81,6 +81,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdditionalControl\ExpandableButton.xaml.cs">
+      <DependentUpon>ExpandableButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdditionalPages\SettingsPages\GeneralSettingsPage.xaml.cs">
       <DependentUpon>GeneralSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,8 @@
     <Compile Include="Logic\ScreenCaptures\CaptureTypeAttribute.cs" />
     <Compile Include="Logic\ScreenCaptures\IScreenCapturer.cs" />
     <Compile Include="Logic\ScreenCaptures\SquareAreaScreeenCapturer.cs" />
+    <Compile Include="Logic\Tools\ImageToolBase.cs" />
+    <Compile Include="Logic\Tools\PointTool.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -129,6 +134,10 @@
     <Compile Include="ViewModel\SettingsPageViewModel\KeyBindingsViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="AdditionalControl\ExpandableButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdditionalPages\SettingsPages\GeneralSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Logic\Drawing\MovingImageThumb.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\AdditionalMetroStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

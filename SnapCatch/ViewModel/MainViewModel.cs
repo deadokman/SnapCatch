@@ -1,12 +1,14 @@
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using SnapCatch.Logic.Drawing;
+using SnapCatch.Logic.Tools;
+using Size = System.Drawing.Size;
 
 namespace SnapCatch.ViewModel
 {
@@ -19,6 +21,7 @@ namespace SnapCatch.ViewModel
         private double _imageCenterY;
         private double _workAreaScaleFactor;
         private double _value;
+        private ObservableCollection<ImageToolBase> _pointToolItems;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -30,6 +33,15 @@ namespace SnapCatch.ViewModel
             SliderValue = 0;
 
             DrawingLayers = new ObservableCollection<DrawingLayer>();
+            PointToolItems = new ObservableCollection<ImageToolBase>()
+            {
+                new PointTool(),
+                new PointTool(),
+                new PointTool()
+            };
+
+
+
             RestoreWindowCommand = new RelayCommand(() =>
                 {
                     App.Current.MainWindow.Show();
@@ -51,8 +63,8 @@ namespace SnapCatch.ViewModel
 
         public void ActivateEditor(ImageSource img)
         {
-            App.Current.MainWindow.Show();
-            App.Current.MainWindow.Activate();
+            Application.Current.MainWindow.Show();
+            Application.Current.MainWindow.Activate();
             Width = img.Width;
             Height = img.Height;
             var dl = new DrawingLayer();
@@ -148,6 +160,16 @@ namespace SnapCatch.ViewModel
                 _height = value;
                 ImageCenterY = Height / 2;
                 RaisePropertyChanged(() => Height);
+            }
+        }
+
+        public ObservableCollection<ImageToolBase> PointToolItems
+        {
+            get { return _pointToolItems; }
+            set
+            {
+                _pointToolItems = value; 
+                RaisePropertyChanged(() => PointToolItems);
             }
         }
 

@@ -6,9 +6,11 @@
         xmlns:local="clr-namespace:SnapCatch"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:additionalControl="clr-namespace:SnapCatch.AdditionalControl"
         mc:Ignorable="d"
-        x:Name="MainWindowContainer"
-        Title="{DynamicResource app_MainWindowName}" Height="350" Width="525" DataContext="{Binding Source={StaticResource Locator}, Path=Main}" Background="{DynamicResource ControlBackgroundBrush}">
+        x:Name="MwndContainer"
+        Title="{DynamicResource app_MainWindowName}" Height="600" Width="920" DataContext="{Binding Source={StaticResource Locator}, Path=Main}" 
+                      Background="{DynamicResource ControlBackgroundBrush}">
     <Grid Background="{DynamicResource AccentColorBrush4}">
         <Grid.Resources>
             <ControlTemplate x:Key="ExpanderControlTemplate"  TargetType="{x:Type Expander}">
@@ -53,9 +55,9 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="1">
+            <Grid ClipToBounds="False"  Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Background="{DynamicResource ControlBackgroundBrush}">
@@ -86,9 +88,33 @@
                         </Border>
                     </Border>
                 </ScrollViewer>
+                <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentBaseColorBrush}">
+                    <Canvas  Background="{DynamicResource ControlBackgroundBrush}">
+                        <additionalControl:ExpandableButton ExpandButtonWidth="5" Width="45" Height="40" Items="{Binding PointToolItems}">
+                            <additionalControl:ExpandableButton.ItemTemplate>
+                                <DataTemplate>
+                                    <ToggleButton Style="{StaticResource MetroCircleToggleButtonStyle}"
+                                                      Height="{Binding Path=Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type additionalControl:ExpandableButton}}}"
+                                                      Width="40">
+                                    </ToggleButton>
+                                </DataTemplate>
+                            </additionalControl:ExpandableButton.ItemTemplate>
+                        </additionalControl:ExpandableButton>
+                        <additionalControl:ExpandableButton Canvas.Top="40" ExpandButtonWidth="5" Width="45" Height="40" Items="{Binding PointToolItems}">
+                            <additionalControl:ExpandableButton.ItemTemplate>
+                                <DataTemplate>
+                                    <ToggleButton Style="{StaticResource MetroCircleToggleButtonStyle}"
+                                                  Height="{Binding Path=Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type additionalControl:ExpandableButton}}}"
+                                                  Width="40">
+                                    </ToggleButton>
+                                </DataTemplate>
+                            </additionalControl:ExpandableButton.ItemTemplate>
+                        </additionalControl:ExpandableButton>
+                    </Canvas>
+                </Border>
             </Grid>
             <StatusBar x:Name="StatusBar" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="2" Background="{DynamicResource AccentBaseColorBrush}">
-                <DockPanel LastChildFill="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=MainWindowContainer, Path=Width}">
+                <DockPanel LastChildFill="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=MwndContainer, Path=Width}">
                     <TextBlock  Margin="4,0,4,0" Text="100%" Background="{DynamicResource AccentColorBrush2}"></TextBlock>
                     <Slider Margin="0,0,16,0" 
                             Value="{Binding SliderValue}"
