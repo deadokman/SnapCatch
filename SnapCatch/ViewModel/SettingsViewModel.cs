@@ -24,10 +24,7 @@ namespace SnapCatch.ViewModel
                 new SettingsDisplayItem((Canvas)IconResources.SharedDictionary["appbar_settings"], "ОБЩИЕ", new GeneralSettingsPage()),
                 new SettingsDisplayItem((Canvas)IconResources.SharedDictionary["appbar_input_keyboard"], "КЛАВИШИ", new KeyBindingsPage()),
                 new SettingsDisplayItem((Canvas)IconResources.SharedDictionary["appbar_camera"], "СНИМОК", new KeyBindingsPage()),
-                new SettingsDisplayItem((Canvas)IconResources.SharedDictionary["appbar_laptop"], "ИНТЕРФЕЙС", new InterfaceSettingsPage()),
-
-                
-
+                new SettingsDisplayItem((Canvas)IconResources.SharedDictionary["appbar_laptop"], "ИНТЕРФЕЙС", new InterfaceSettingsPage()),   
             });
 
             SelectedItem = DisplayItems[0];
@@ -43,8 +40,6 @@ namespace SnapCatch.ViewModel
                 SelectedIndex = idx;
             }
         }
-
-
 
         public List<SettingsDisplayItem> DisplayItems { get; set; }
 

@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using SnapCatch.Logic;
 using SnapCatch.Logic.Drawing;
 using SnapCatch.Logic.Tools;
 using SnapCatch.Logic.Tools.ToolItems;
@@ -29,15 +30,19 @@ namespace SnapCatch.ViewModel
         public ToolsManager ToolManager { get; set; }
 
         /// <summary>
+        /// Controlls view port scale, offsets and translate viewporrt coordinates to image coordinates
+        /// </summary>
+        public ViewportController ViewportController { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
             _width = 300;
             _height = 300;
-            SliderValue = 0;
             ToolManager = new ToolsManager();
-            if (!this.IsInDesignMode)
+            if (!IsInDesignMode)
             {
                 ToolManager.InitInstance();
             }
@@ -66,8 +71,7 @@ namespace SnapCatch.ViewModel
         {
             Application.Current.MainWindow.Show();
             Application.Current.MainWindow.Activate();
-            Width = img.Width;
-            Height = img.Height;
+            ViewportController.ImageChanged(img);
             var dl = new DrawingLayer();
             Canvas.SetTop(dl, 0);
             Canvas.SetLeft(dl, 0);
@@ -83,87 +87,7 @@ namespace SnapCatch.ViewModel
             DrawingLayers.Add(dl);
         }
 
-        /// <summary>
-        /// Change work area size
-        /// </summary>
-        /// <param name="size"></param>
-        public void SetWorkAreaSize(Size size)
-        {
-            Width = size.Width;
-            Height = size.Height;
-        }
-
-        public double ImageCenterX
-        {
-            get { return _imageCenterX; }
-            private set
-            {
-                _imageCenterX = value;
-                RaisePropertyChanged(() => ImageCenterX);
-            }
-        }
-
-        public double ImageCenterY
-        {
-            get { return _imageCenterY; }
-            private set
-            {
-                _imageCenterY = value;
-                RaisePropertyChanged(() => ImageCenterY);
-            }
-        }
-
-        public double SliderValue
-        {
-            get { return _value; }
-            set
-            {
-                _value = value;
-                WorkAreaScaleFactor = 1 + value / 10;
-            }
-        }
-
-        /// <summary>
-        /// Work area scalling value
-        /// </summary>
-        public double WorkAreaScaleFactor
-        {
-            get { return _workAreaScaleFactor; }
-            set
-            {
-                _workAreaScaleFactor = value;
-                RaisePropertyChanged(() => WorkAreaScaleFactor);
-            }
-        }
-
-        /// <summary>
-        /// WorkArea width
-        /// </summary>
-        public double Width
-        {
-            get { return _width; }
-            set
-            {
-                _width = value;
-                ImageCenterX = _width / 2;
-                RaisePropertyChanged(() => Width);
-            }
-        }
-
-        /// <summary>
-        /// Work area Height
-        /// </summary>
-        public double Height
-        {
-            get { return _height; }
-            set
-            {
-                _height = value;
-                ImageCenterY = Height / 2;
-                RaisePropertyChanged(() => Height);
-            }
-        }
-
+    
         public ObservableCollection<DrawingLayer> DrawingLayers { get; set; }
 
         /// <summary>

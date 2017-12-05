@@ -11,6 +11,14 @@
         x:Name="MwndContainer"
         Title="{DynamicResource app_MainWindowName}" Height="600" Width="920" DataContext="{Binding Source={StaticResource Locator}, Path=Main}" 
                       Background="{DynamicResource ControlBackgroundBrush}">
+    <!--general flyouts-->
+    <controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl>
+            <controls:Flyout IsModal="False" Header="Flyout" Position="Right" Width="200">
+                <!-- Your custom content here -->
+            </controls:Flyout>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
     <Grid Background="{DynamicResource AccentColorBrush4}">
         <tb:TaskbarIcon IconSource="Resources/Icons/tray_ico.ico" 
                         DoubleClickCommand="{Binding RestoreWindowCommand}">
@@ -37,8 +45,12 @@
                 <StackPanel Grid.Column="0" Background="{DynamicResource ControlBackgroundBrush}">
 
                 </StackPanel>
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="{DynamicResource AccentBaseColorBrush}">
+                <ScrollViewer 
+                    HorizontalScrollBarVisibility="Auto" 
+                    Grid.Column="1" 
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch">
+                    <Border Margin="40, 40" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="{DynamicResource AccentBaseColorBrush}">
                         <Border   VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
                             <Border.Effect>
                                 <DropShadowEffect Direction="30" Opacity=".2" Color="{DynamicResource BlackColor}" ShadowDepth="7"></DropShadowEffect>
@@ -47,10 +59,13 @@
                                 <ItemsControl ItemsSource="{Binding DrawingLayers }">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <Canvas RenderOptions.EdgeMode="Aliased" SnapsToDevicePixels="True" Width="{Binding Width}" Height="{Binding Height}">
+                                            <Canvas RenderOptions.EdgeMode="Aliased" SnapsToDevicePixels="True" Width="{Binding ViewportController.WorkAreaWidth}" Height="{Binding ViewportController.WorkAreaHeight}">
                                                 <Canvas.LayoutTransform>
                                                     <TransformGroup>
-                                                        <ScaleTransform  ScaleX="{Binding WorkAreaScaleFactor}" ScaleY="{Binding WorkAreaScaleFactor}" CenterX="{Binding ImageCenterX}" CenterY="{Binding ImageCenterY}"/>
+                                                        <ScaleTransform  ScaleX="{Binding ViewportController.LayoutScaleTransformValue, Mode=TwoWay}" 
+                                                                         ScaleY="{Binding ViewportController.LayoutScaleTransformValue, Mode=TwoWay}" 
+                                                                         CenterX="{Binding ViewportController.ImageCenterX}" 
+                                                                         CenterY="{Binding ViewportController.ImageCenterY}"/>
                                                         <TranslateTransform ></TranslateTransform>
                                                     </TransformGroup>
                                                 </Canvas.LayoutTransform>
@@ -158,12 +173,12 @@
                 <DockPanel LastChildFill="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=MwndContainer, Path=Width}">
                     <TextBlock  Margin="4,0,4,0" Text="100%" Background="{DynamicResource AccentColorBrush2}"></TextBlock>
                     <Slider Margin="0,0,16,0" 
-                            Value="{Binding SliderValue}"
+                            Value="{Binding ViewportController.SliderValue, Mode=TwoWay}"
                             TickPlacement="None" 
                             Foreground="{DynamicResource TextBoxBorderBrush}" 
                             VerticalAlignment="Stretch" 
                             HorizontalAlignment="Stretch"
-                            TickFrequency="10" Ticks="29" Minimum="0" Maximum="300" Style="{DynamicResource FlatSlider}"></Slider>
+                            TickFrequency="10" Ticks="29" Minimum="-10" Maximum="300" Style="{DynamicResource FlatSlider}"></Slider>
                 </DockPanel>
             </StatusBar>
         </Grid>

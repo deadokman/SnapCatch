@@ -114,6 +114,7 @@
     <Compile Include="Logic\Tools\SnapCatchToolAttribute.cs" />
     <Compile Include="Logic\Tools\ToolItems\MoverTool.cs" />
     <Compile Include="Logic\Tools\ToolItems\LayerMoverTool.cs" />
+    <Compile Include="Logic\ViewportController.cs" />
     <Compile Include="Resources\ResourceConstants.cs" />
     <Compile Include="Logic\Tools\ToolBase.cs" />
     <Compile Include="Logic\Tools\ToolItems\PointTool.cs" />
