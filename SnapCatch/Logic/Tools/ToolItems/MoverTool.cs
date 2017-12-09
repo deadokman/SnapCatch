@@ -1,15 +1,12 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Shapes;
-using SnapCatch.Resources;
+﻿using SnapCatch.Resources;
 
 namespace SnapCatch.Logic.Tools.ToolItems
 {
     [SnapCatchTool(1)]
     public class MoverTool : ToolBase
     {
-        public MoverTool() 
-            :base(ResourceConstants.PointerMoverResource, ResourceConstants.PointerMoverToolTip, ResourceConstants.PointerToolsGroup)
+        public MoverTool(ViewportManager viewportManager, LayersManager layersManager) 
+            :base(ResourceConstants.PointerMoverResource, ResourceConstants.PointerMoverToolTip, ResourceConstants.PointerToolsGroup, layersManager, viewportManager)
         {
 
         }

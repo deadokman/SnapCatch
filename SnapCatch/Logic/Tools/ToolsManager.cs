@@ -45,8 +45,20 @@ namespace SnapCatch.Logic.Tools
         /// </summary>
         public ToolBase ActiveTool { get; set; }
 
-        public ToolsManager()
+        /// <summary>
+        /// Instance of layer manager
+        /// </summary>
+        private LayersManager _layersManager;
+
+        /// <summary>
+        /// Instance of viewport manager
+        /// </summary>
+        private ViewportManager _viewportManager;
+
+        public ToolsManager(LayersManager layersManager, ViewportManager viewPortManager)
         {
+            _layersManager = layersManager;
+            _viewportManager = viewPortManager;
             _loadtoolsWork = new BackgroundWorker();
         }
 
@@ -87,7 +99,7 @@ namespace SnapCatch.Logic.Tools
             var dict = new Dictionary<string, List<ToolBase>>();
             foreach (var type in toolTypes)
             {
-                var instance = (ToolBase)Activator.CreateInstance(type);
+                var instance = (ToolBase)Activator.CreateInstance(type, _viewportManager, _layersManager);
                 var attr = (SnapCatchToolAttribute)type.GetCustomAttribute(typeof(SnapCatchToolAttribute));
                 instance.InitTool(attr.OrderIndex);
                 List<ToolBase> tools;

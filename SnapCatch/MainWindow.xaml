@@ -23,7 +23,7 @@
         <tb:TaskbarIcon IconSource="Resources/Icons/tray_ico.ico" 
                         DoubleClickCommand="{Binding RestoreWindowCommand}">
             <tb:TaskbarIcon.ContextMenu>
-                <ContextMenu Background="{DynamicResource ControlBackgroundBrush}">
+                <ContextMenu Background="{DynamicResource ControlBackgroundBrush}" Foreground="{DynamicResource TextBrush}">
                     <ContextMenu.Items>
                         <MenuItem Command="{Binding DisplaySettings}" Header="Настройки"/>
                         <MenuItem Command="{Binding CloseAppCommand}" Header="Закрыть"/>
@@ -42,30 +42,33 @@
                     <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Background="{DynamicResource ControlBackgroundBrush}">
-
-                </StackPanel>
                 <ScrollViewer 
+                    Grid.Column="1"
                     HorizontalScrollBarVisibility="Auto" 
-                    Grid.Column="1" 
+                    VerticalScrollBarVisibility="Visible"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch">
-                    <Border Margin="40, 40" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="{DynamicResource AccentBaseColorBrush}">
-                        <Border   VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+                    <Border VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{DynamicResource AccentBaseColorBrush}">
+                        <Border BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
                             <Border.Effect>
                                 <DropShadowEffect Direction="30" Opacity=".2" Color="{DynamicResource BlackColor}" ShadowDepth="7"></DropShadowEffect>
                             </Border.Effect>
-                            <Viewbox RenderOptions.EdgeMode="Aliased" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Stretch="Uniform">
-                                <ItemsControl ItemsSource="{Binding DrawingLayers }">
+                            <Viewbox RenderOptions.EdgeMode="Aliased" Stretch="None">
+                                <ItemsControl ItemsSource="{Binding LayersManager.DrawingLayers }">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <Canvas RenderOptions.EdgeMode="Aliased" SnapsToDevicePixels="True" Width="{Binding ViewportController.WorkAreaWidth}" Height="{Binding ViewportController.WorkAreaHeight}">
+                                            <Canvas RenderOptions.EdgeMode="Aliased" 
+                                                    SnapsToDevicePixels="True"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Width="{Binding ViewportManager.WorkAreaWidth}" 
+                                                    Height="{Binding ViewportManager.WorkAreaHeight}">
                                                 <Canvas.LayoutTransform>
                                                     <TransformGroup>
-                                                        <ScaleTransform  ScaleX="{Binding ViewportController.LayoutScaleTransformValue, Mode=TwoWay}" 
-                                                                         ScaleY="{Binding ViewportController.LayoutScaleTransformValue, Mode=TwoWay}" 
-                                                                         CenterX="{Binding ViewportController.ImageCenterX}" 
-                                                                         CenterY="{Binding ViewportController.ImageCenterY}"/>
+                                                        <ScaleTransform  ScaleX="{Binding ViewportManager.LayoutScaleTransformValue, Mode=TwoWay}" 
+                                                                         ScaleY="{Binding ViewportManager.LayoutScaleTransformValue, Mode=TwoWay}" 
+                                                                         CenterX="{Binding ViewportManager.ImageCenterX}" 
+                                                                         CenterY="{Binding ViewportManager.ImageCenterY}"/>
                                                         <TranslateTransform ></TranslateTransform>
                                                     </TransformGroup>
                                                 </Canvas.LayoutTransform>
@@ -90,7 +93,7 @@
                                      Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Canvas}, Path=Width}"
                                      HorizontalContentAlignment="Center"
                                      VerticalAlignment="Center"
-                                     ItemsSource="{Binding ToolManager.ToolGroups}">
+                                     ItemsSource="{Binding ToolsManager.ToolGroups}">
                                 <ListBox.ItemContainerStyle>
                                     <Style TargetType="{x:Type ListBoxItem}">
                                         <Setter Property="Focusable" Value="false"/>
@@ -99,7 +102,7 @@
                                         <Setter Property="Padding" Value="0"/>
                                         <Style.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"></Setter>
+                                                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"></Setter>
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>
@@ -173,7 +176,7 @@
                 <DockPanel LastChildFill="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=MwndContainer, Path=Width}">
                     <TextBlock  Margin="4,0,4,0" Text="100%" Background="{DynamicResource AccentColorBrush2}"></TextBlock>
                     <Slider Margin="0,0,16,0" 
-                            Value="{Binding ViewportController.SliderValue, Mode=TwoWay}"
+                            Value="{Binding ViewportManager.SliderValue, Mode=TwoWay}"
                             TickPlacement="None" 
                             Foreground="{DynamicResource TextBoxBorderBrush}" 
                             VerticalAlignment="Stretch" 

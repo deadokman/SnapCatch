@@ -8,7 +8,7 @@ namespace SnapCatch.Logic
     /// <summary>
     /// Controlls ViewPort scale and converts ViewPort coordinates to Image coordinates
     /// </summary>
-    public class ViewportController : INotifyPropertyChanged
+    public class ViewportManager : INotifyPropertyChanged
     {
         private double _sliderValue;
         private double _layoutScaleTransformValue;
@@ -19,11 +19,15 @@ namespace SnapCatch.Logic
         private double _verticalScrollOffset;
         private double _horizontalScrollOffset;
 
-        public ViewportController()
+        public ViewportManager()
         {
             _sliderValue = 0;
             _workAreaWidth = 300;
             _workAreaHeight = 300;
+            _imageCenterX = 0;
+            _imageCenterY = 0;
+            _sliderValue = 0;
+            _layoutScaleTransformValue = 1;
         }
 
 
@@ -99,7 +103,11 @@ namespace SnapCatch.Logic
         public double WorkAreaHeight
         {
             get { return _workAreaHeight; }
-            set { _workAreaHeight = value; }
+            set
+            {
+                _workAreaHeight = value;
+                OnPropertyChanged();
+            }
         }
 
         /// <summary>

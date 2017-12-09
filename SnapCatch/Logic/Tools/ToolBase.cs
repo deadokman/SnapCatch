@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shapes;
 using SnapCatch.Annotations;
-using SnapCatch.Resources;
 
 namespace SnapCatch.Logic.Tools
 {
@@ -89,9 +84,29 @@ namespace SnapCatch.Logic.Tools
             DefaultOrder = order;
         }
 
-        public ToolBase(string imgKey, string toolTipName, string groupKey) 
+        /// <summary>
+        /// Reference to Layers manger
+        /// </summary>
+        protected LayersManager LayersManager { get; private set; }
+
+        /// <summary>
+        /// Reference to viewport manager
+        /// </summary>
+        protected ViewportManager ViewportManager { get; private set; }
+
+        /// <summary>
+        /// Base class for tool
+        /// </summary>
+        /// <param name="imgKey"> Resource key for tool icon </param>
+        /// <param name="toolTipName"> Resource key for localized resource name </param>
+        /// <param name="groupKey"> Group key for autogrouping feature </param>
+        /// <param name="layersManager"> Reference to application layers manager </param>
+        /// <param name="viewportManager"> Reference to application viewport manager </param>
+        public ToolBase(string imgKey, string toolTipName, string groupKey, LayersManager layersManager, ViewportManager viewportManager) 
             : this()
         {
+            LayersManager = layersManager;
+            ViewportManager = viewportManager;
             _toolImageKey = imgKey;
             _toolNameKey = toolTipName;
             ToolImagePath = (Path)Application.Current.FindResource(_toolImageKey);

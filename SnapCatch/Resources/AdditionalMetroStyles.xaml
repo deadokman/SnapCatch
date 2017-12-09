@@ -19,13 +19,13 @@
     </Style>
     <Style x:Key="MetroToggleFlatAccentButton" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource MetroFlatToggleButton}">
         <Setter Property="BorderThickness" Value="0"></Setter>
-        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"></Setter>
+        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"></Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="{DynamicResource AccentColor4}"></Setter>
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource AccentSelectedColorBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource AccentSelectedColorBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

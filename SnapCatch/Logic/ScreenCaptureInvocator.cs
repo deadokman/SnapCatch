@@ -31,7 +31,7 @@ namespace SnapCatch.Logic
                 .Select(t =>
                 {
                     var instance = (IScreenCapturer) Activator.CreateInstance(t); 
-                    instance.CaptureScreen += InstanceOnCaptureScreen;
+                    instance.CaptureScreen += OnCaptureScreen;
                     return new
                     {
                         attr = (CaptureTypeAttribute) t.GetCustomAttribute(attr),
@@ -40,13 +40,13 @@ namespace SnapCatch.Logic
                 }).ToDictionary(i => i.attr.ActionType, i => i.instance);
         }
 
-        private void InstanceOnCaptureScreen(ImageSource img)
+        private void OnCaptureScreen(ImageSource img)
         {
             //throw new NotImplementedException();
             var mainEditorVm = SimpleIoc.Default.GetInstance<MainViewModel>();
             if (mainEditorVm != null)
             {
-                mainEditorVm.ActivateEditor(img);
+                mainEditorVm.ScreenCaptured(img);
             }
         }
 
