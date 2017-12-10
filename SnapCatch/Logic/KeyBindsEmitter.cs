@@ -8,6 +8,9 @@ using SnapCatch.KeyHook;
 
 namespace SnapCatch.Logic
 {
+    /// <summary>
+    /// Emitts event when pre-defined key combination have been pressed
+    /// </summary>
     public static class KeyBindsEmitter
     {
         private static Dictionary<ActionTypes, KeyBindsContainer> _keyPressHolder = new Dictionary<ActionTypes, KeyBindsContainer>();
@@ -92,6 +95,11 @@ namespace SnapCatch.Logic
             }
         }
 
+        /// <summary>
+        /// Converts key combination to Keys ENUM
+        /// </summary>
+        /// <param name="hashStr"></param>
+        /// <returns></returns>
         private static HashSet<Keys> DeserializeKeyBindsHash(string hashStr)
         {
             var res = new HashSet<Keys>();

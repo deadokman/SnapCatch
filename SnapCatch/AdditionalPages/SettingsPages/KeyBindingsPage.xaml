@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SnapCatch.AdditionalPages.SettingsPages"
       xmlns:viewModel="clr-namespace:SnapCatch.ViewModel"
+      xmlns:logic="clr-namespace:SnapCatch.Logic"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="KeyBindingsPage" Background="Transparent" DataContext="{Binding Source={StaticResource Locator}, Path=KeyBindingsViewModel}">
@@ -29,13 +30,13 @@
             <TextBox GotFocus="SquareScreenHotKey_OnGotFocus" LostFocus="SquareScreenHotKey_OnLostFocus" 
                      IsReadOnly="True" 
                      Text="{Binding SquareAreaText}" 
-                     viewModel:FocusExtension.IsFocused="{Binding IsSquareAreaFocused}" 
+                     viewModel:ViewExtension.IsFocused="{Binding IsSquareAreaFocused}" 
                      x:Name="SquareScreenHotKey"></TextBox>
             <TextBlock Foreground="{DynamicResource TextBrush}" Text="{DynamicResource kb_screen}"/>
             <TextBox GotFocus="ActiveScreenHotKey_OnGotFocus" 
                      LostFocus="ActiveScreenHotKey_OnLostFocus" 
                      Text="{Binding ActiveScreenText}" 
-                     viewModel:FocusExtension.IsFocused="{Binding IsScreenAreaFocused}" 
+                     viewModel:ViewExtension.IsFocused="{Binding IsScreenAreaFocused}" 
                      x:Name="ActiveScreenHotKey" IsReadOnly="True">
             </TextBox>
             <TextBlock Foreground="{DynamicResource TextBrush}" Text="{DynamicResource kb_active_window}"/>
@@ -43,7 +44,7 @@
                 GotFocus="ActiveWindowHotKey_OnGotFocus"
                 LostFocus="ActiveWindowHotKey_OnLostFocus"
                 Text="{Binding ActiveWindowText}" 
-                viewModel:FocusExtension.IsFocused="{Binding IsScreenAreaFocused}" 
+                viewModel:ViewExtension.IsFocused="{Binding IsScreenAreaFocused}" 
                 x:Name="ActiveWindowHotKey" IsReadOnly="True">
             </TextBox>
             <!--End theme block-->

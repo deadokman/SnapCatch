@@ -101,7 +101,7 @@
       <DependentUpon>MovingImageThumb.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\Drawing\MovingThumb.cs" />
-    <Compile Include="Logic\Extensions.cs" />
+    <Compile Include="Logic\LogicExtensions.cs" />
     <Compile Include="Logic\KeyBindsContainer.cs" />
     <Compile Include="Logic\KeyBindsEmitter.cs" />
     <Compile Include="Logic\ActionTypes.cs" />
@@ -135,7 +135,7 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\FocusExtension.cs" />
+    <Compile Include="ViewModel\ViewExtension.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SettingsPageViewModel\AccentColorMenuData.cs" />
     <Compile Include="ViewModel\SettingsPageViewModel\AppThemeMenuData.cs" />

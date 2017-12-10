@@ -43,7 +43,7 @@ namespace SnapCatch.Logic
             {
                 layer.Width = imgSource.Width;
                 layer.Height = imgSource.Height;
-                ActiveLayer = layer;
+                ActiveLayer = layer; 
             }
             else
             {

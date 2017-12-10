@@ -7,7 +7,7 @@ using SnapCatch.Logic.Tools;
 
 namespace SnapCatch.Logic
 {
-    public static class Extensions
+    public static class LogicExtensions
     {
         public static void InsertInOrder(this List<ToolBase> tools, ToolBase tool)
         {

@@ -7,6 +7,8 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:additionalControl="clr-namespace:SnapCatch.AdditionalControl"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
         x:Name="MwndContainer"
         Title="{DynamicResource app_MainWindowName}" Height="600" Width="920" DataContext="{Binding Source={StaticResource Locator}, Path=Main}" 
@@ -54,15 +56,26 @@
                                 <DropShadowEffect Direction="30" Opacity=".2" Color="{DynamicResource BlackColor}" ShadowDepth="7"></DropShadowEffect>
                             </Border.Effect>
                             <Viewbox RenderOptions.EdgeMode="Aliased" Stretch="None">
-                                <ItemsControl ItemsSource="{Binding LayersManager.DrawingLayers }">
+                                <ItemsControl x:Name="CanvasItemsControl" ItemsSource="{Binding LayersManager.DrawingLayers }">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <Canvas RenderOptions.EdgeMode="Aliased" 
+                                            <Canvas RenderOptions.EdgeMode="Aliased"
+                                                    Background="Transparent"
+                                                    x:Name="MainCanvasDisplay"
                                                     SnapsToDevicePixels="True"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     Width="{Binding ViewportManager.WorkAreaWidth}" 
-                                                    Height="{Binding ViewportManager.WorkAreaHeight}">
+                                                    Height="{Binding ViewportManager.WorkAreaHeight}" 
+                                                    MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"
+                                                    MouseLeftButtonUp="MainCanvasDisplay_OnMouseLeftButtonUp">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                        <command:EventToCommand
+                                                            Command="{Binding }"
+                                                            CommandParameter="{Binding Mode=OneWay}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
                                                 <Canvas.LayoutTransform>
                                                     <TransformGroup>
                                                         <ScaleTransform  ScaleX="{Binding ViewportManager.LayoutScaleTransformValue, Mode=TwoWay}" 

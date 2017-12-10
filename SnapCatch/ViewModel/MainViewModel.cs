@@ -52,7 +52,6 @@ namespace SnapCatch.ViewModel
             });
         }
 
-
         public void ScreenCaptured(ImageSource img)
         {
             SetWindowActive();
