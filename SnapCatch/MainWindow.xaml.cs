@@ -53,9 +53,42 @@ namespace SnapCatch
             base.OnClosing(e);
         }
 
+        public TChildItem FindVisualChild<TChildItem>(DependencyObject obj) where TChildItem : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                var child = VisualTreeHelper.GetChild(obj, i);
+
+                if (child != null && child is TChildItem)
+                {
+                    return (TChildItem) child;
+                }
+
+                var childOfChild = FindVisualChild<TChildItem>(child);
+
+                if (childOfChild != null)
+                {
+                    return childOfChild;
+                }
+            }
+
+            return null;
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var canvas = FindVisualChild<Canvas>(this);
         }
     }
 }

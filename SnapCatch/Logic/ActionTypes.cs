@@ -1,7 +1,7 @@
 ﻿namespace SnapCatch.Logic
 {
     /// <summary>
-    /// Avaliable screen keybinds type
+    /// Avaliable screen keybinds type, enum field name should compare to settings name for auto-binding keys
     /// Доступные типы кейбиндингов
     /// </summary>
     public enum ActionTypes

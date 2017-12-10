@@ -15,6 +15,9 @@ namespace SnapCatch.Logic
         /// </summary>
         public ObservableCollection<DrawingLayer> DrawingLayers { get; private set; }
 
+        /// <summary>
+        /// Reference to view port manager
+        /// </summary>
         private ViewportManager _viewportManager;
 
         public LayersManager(ViewportManager viewPortManager)
@@ -22,6 +25,11 @@ namespace SnapCatch.Logic
             _viewportManager = viewPortManager;
             DrawingLayers = new ObservableCollection<DrawingLayer>();
         }
+
+        /// <summary>
+        /// Current selected layer
+        /// </summary>
+        public DrawingLayer ActiveLayer { get; set; }
 
         /// <summary>
         /// Instance new layer from image source
@@ -35,6 +43,7 @@ namespace SnapCatch.Logic
             {
                 layer.Width = imgSource.Width;
                 layer.Height = imgSource.Height;
+                ActiveLayer = layer;
             }
             else
             {

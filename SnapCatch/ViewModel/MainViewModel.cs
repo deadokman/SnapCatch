@@ -8,7 +8,6 @@ using SnapCatch.Logic.Tools;
 
 namespace SnapCatch.ViewModel
 {
-
     public class MainViewModel : ViewModelBase
     {
         /// <summary>
@@ -82,5 +81,10 @@ namespace SnapCatch.ViewModel
         /// Click on close app in context menu tray
         /// </summary>
         public ICommand CloseAppCommand { get; set; }
+
+        /// <summary>
+        /// Start using tool command, apperars when left mouse button down
+        /// </summary>
+        public ICommand StartUsingTool { get; set; }
     }
 }
