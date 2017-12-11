@@ -25,14 +25,17 @@ namespace SnapCatch.ViewModel
         /// </summary>
         public LayersManager LayersManager { get; private set; }
 
+        public ManagerContainer ManagerContainer { get; private set;  }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
-        {
+        {   
             ViewportManager = new ViewportManager();
             LayersManager = new LayersManager(ViewportManager);
             ToolsManager = new ToolsManager(LayersManager, ViewportManager);
+            ManagerContainer = new ManagerContainer(ViewportManager, LayersManager,ToolsManager );
             if (!IsInDesignMode)
             {
                 ToolsManager.InitInstance();
