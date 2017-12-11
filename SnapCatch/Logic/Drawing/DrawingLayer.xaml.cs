@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
+using System.Windows.Input;
 using SnapCatch.Annotations;
 
 namespace SnapCatch.Logic.Drawing

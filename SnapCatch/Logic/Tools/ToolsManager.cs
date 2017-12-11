@@ -25,6 +25,9 @@ namespace SnapCatch.Logic.Tools
         /// </summary>
         private ToolsGroup[] _toolGroups;
 
+        /// <summary>
+        /// Active tool group
+        /// </summary>
         private ToolsGroup _currentActiveGroup;
 
         /// <summary>
@@ -54,6 +57,49 @@ namespace SnapCatch.Logic.Tools
         /// Instance of viewport manager
         /// </summary>
         private ViewportManager _viewportManager;
+
+        /// <summary>
+        /// Tool in use flag
+        /// </summary>
+        private bool _toolInUse { get; set; }
+
+        /// <summary>
+        /// Activate selected tool 
+        /// </summary>
+        public void ActivateTool()
+        {
+            RunIfToolActive(() =>
+            {
+                _toolInUse = true;
+            });
+        } 
+
+        /// <summary>
+        /// Deactivate seleted tool
+        /// </summary>
+        public void DeactivateTool()
+        {
+            RunIfToolActive(() =>
+            {
+                _toolInUse = false;
+            });
+        }
+
+        public void ReactOnMouseMove()
+        {
+            if (_toolInUse)
+            {
+                
+            }
+        }
+
+        private void RunIfToolActive(Action invoke)
+        {
+            if (ActiveTool != null && ActiveTool.IsSelected && invoke != null)
+            {
+               invoke.Invoke();
+            }
+        }
 
         public ToolsManager(LayersManager layersManager, ViewportManager viewPortManager)
         {

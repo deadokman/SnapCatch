@@ -6,6 +6,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
-        <Canvas SnapsToDevicePixels="True" x:Name="CanvasDisplay" Width="{Binding Width}" Height="{Binding Height}" ClipToBounds="True" />
+        <Canvas
+            SnapsToDevicePixels="True" x:Name="CanvasDisplay" 
+            Width="{Binding Width}" 
+            Height="{Binding Height}" 
+            ClipToBounds="True" />
     </Grid>
 </UserControl>

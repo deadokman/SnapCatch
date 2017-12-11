@@ -67,12 +67,22 @@
                                                     VerticalAlignment="Center"
                                                     Width="{Binding ViewportManager.WorkAreaWidth}" 
                                                     Height="{Binding ViewportManager.WorkAreaHeight}" 
-                                                    MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"
-                                                    MouseLeftButtonUp="MainCanvasDisplay_OnMouseLeftButtonUp">
+                                                    PreviewMouseLeftButtonDown="MainCanvasDisplay_OnPreviewMouseLeftButtonDown"
+                                                    PreviewMouseLeftButtonUp="MainCanvasDisplay_OnPreviewMouseLeftButtonUp">
                                                 <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
                                                         <command:EventToCommand
-                                                            Command="{Binding }"
+                                                            Command="{Binding StartUsingToolCommand}"
+                                                            CommandParameter="{Binding Mode=OneWay}" />
+                                                    </i:EventTrigger>
+                                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                                        <command:EventToCommand
+                                                            Command="{Binding EndUsingToolCommand}"
+                                                            CommandParameter="{Binding Mode=OneWay}" />
+                                                    </i:EventTrigger>
+                                                    <i:EventTrigger EventName="PreviewMouseMove">
+                                                        <command:EventToCommand
+                                                            Command="{Binding EndUsingToolCommand}"
                                                             CommandParameter="{Binding Mode=OneWay}" />
                                                     </i:EventTrigger>
                                                 </i:Interaction.Triggers>

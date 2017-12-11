@@ -39,7 +39,6 @@ namespace SnapCatch.ViewModel
             }
 
             RestoreWindowCommand = new RelayCommand(SetWindowActive);
-
             DisplaySettings = new RelayCommand(() =>
             {
                 var sw = new SettingsWindow();
@@ -50,6 +49,10 @@ namespace SnapCatch.ViewModel
             {
                 Application.Current.Shutdown();
             });
+
+            StartUsingToolCommand = new RelayCommand(() => ToolsManager.ActivateTool());
+            EndUsingToolCommand = new RelayCommand(() => ToolsManager.DeactivateTool());
+            MoveMoveCommand = new RelayCommand(() => ToolsManager.ReactOnMouseMove());
         }
 
         public void ScreenCaptured(ImageSource img)
@@ -84,6 +87,16 @@ namespace SnapCatch.ViewModel
         /// <summary>
         /// Start using tool command, apperars when left mouse button down
         /// </summary>
-        public ICommand StartUsingTool { get; set; }
+        public ICommand StartUsingToolCommand { get; set; }
+
+        /// <summary>
+        /// Occures when left mouse up
+        /// </summary>
+        public ICommand EndUsingToolCommand { get; set; }
+
+        /// <summary>
+        /// MouseMove
+        /// </summary>
+        public ICommand MoveMoveCommand { get; set; }
     }
 }

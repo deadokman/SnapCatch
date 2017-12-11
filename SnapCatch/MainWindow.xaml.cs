@@ -58,15 +58,14 @@ namespace SnapCatch
             InitializeComponent();
         }
 
-
-        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void MainCanvasDisplay_OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            
         }
 
-        private void MainCanvasDisplay_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void MainCanvasDisplay_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            
         }
     }
 }
