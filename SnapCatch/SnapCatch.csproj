@@ -94,6 +94,7 @@
       <DependentUpon>KeyBindingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdditionalPages\SettingsPages\SettingsItems\SettingsDisplayItem.cs" />
+    <Compile Include="Logic\ManagerContainer.cs" />
     <Compile Include="Logic\Drawing\DrawingLayer.xaml.cs">
       <DependentUpon>DrawingLayer.xaml</DependentUpon>
     </Compile>
